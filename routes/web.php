@@ -14,3 +14,37 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// mock用ルーティング
+
+Route::get('mock/categories/{page?}', function ($page = null) {
+    if(!empty($page)) {
+        return view('mock.categories.' . $page);
+    } else {
+        return view('welcome');
+    }
+})->name('mock_categories');
+
+Route::get('mock/hours/{page?}', function ($page = null) {
+    if(!empty($page)) {
+        return view('mock.hours.' . $page);
+    } else {
+        return view('welcome');
+    }
+})->name('mock_hours');
+
+Route::get('mock/tasks/{page?}', function ($page = null) {
+    if(!empty($page)) {
+        return view('mock.tasks.' . $page);
+    } else {
+        return view('welcome');
+    }
+})->name('mock_tasks');
+
+Route::get('mock/{page?}', function ($page = null) {
+    if(!empty($page)) {
+        return view('mock.' . $page);
+    } else {
+        return view('welcome');
+    }
+})->name('mock');
