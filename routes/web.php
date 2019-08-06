@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // starter.htmlのコピー（不十分）
+    // return view('mock.adminlte');
+    // vendor内のpage（パッケージから）
+    return view('vendor.adminlte.page');
 });
 
 // mock用ルーティング
