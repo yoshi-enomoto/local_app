@@ -1,0 +1,28 @@
+ip: 192.168.10.11
+memory: 2048
+cpus: 2
+provider: virtualbox
+# authorize: ~/.ssh/id_rsa.pub
+authorize: ~/.ssh/github_rsa.pub
+keys:
+    # - ~/.ssh/id_rsa
+    - ~/.ssh/github_rsa
+folders:
+    -
+        map: .
+        to: /home/vagrant/code
+sites:
+    -
+        map: local_app.test
+        to: /home/vagrant/code/public
+databases:
+    - local_app
+features:
+    -
+        mariadb: false
+    -
+        ohmyzsh: false
+    -
+        webdriver: false
+name: local-app
+hostname: local-app
