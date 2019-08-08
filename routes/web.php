@@ -18,6 +18,12 @@ Route::get('/', function () {
     return view('vendor.adminlte.page');
 });
 
+Route::get('/other', function () {
+    // starter.htmlのコピー（不十分）
+    // return view('mock.adminlte');
+    // vendor内のpage（パッケージから）
+    return view('_layouts.default');
+});
 // mock用ルーティング
 
 Route::get('mock/categories/{page?}', function ($page = null) {
