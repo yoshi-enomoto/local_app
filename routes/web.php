@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('/mock_base', function () {
     return view('mock_base');
 });
+
+Route::get('/default', function () {
+    return view('_layouts.default');
+});
 // mock用ルーティング
 
 Route::get('mock/categories/{page?}', function ($page = null) {
