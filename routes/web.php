@@ -15,12 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// 静的なベース
 Route::get('/vendor_static_base', function () {
     return view('vendor.adminlte.vendor_static_base');
 });
 
-Route::get('/default', function () {
-    return view('_layouts.default');
+// 静的なベースを用いて各パーツごとに分けたもの
+Route::get('/vendor_base', function () {
+    return view('vendor.adminlte.vendor_base');
 });
 // mock用ルーティング
 
