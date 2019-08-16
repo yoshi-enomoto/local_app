@@ -85,8 +85,12 @@
             </div>
             <!-- /.container -->
             @endif
+
         </div>
         <!-- /.content-wrapper -->
+
+        <!-- フッター -->
+        @include('_components.footer')
 
     </div>
     <!-- ./wrapper -->
