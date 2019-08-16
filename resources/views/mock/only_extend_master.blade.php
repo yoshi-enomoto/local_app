@@ -27,89 +27,40 @@
     <div class="wrapper">
 
         <!-- Main Header -->
+
+        {{-- 書き換える為、下記すべてを入れ替え --}}
+        <!-- トップメニュー -->
         <header class="main-header">
-            @if(config('adminlte.layout') == 'top-nav')
-            <nav class="navbar navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="navbar-brand">
-                            {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
-                        </a>
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            {{-- $adminlte がundefineになる為、コメアウト --}}
-                            {{-- @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item') --}}
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-            @else
-            <!-- Logo -->
-            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">{!! config('adminlte.logo_mini', '<b>A</b>LT') !!}</span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</span>
-            </a>
+            <!-- ロゴ -->
+            <a href="" class="logo">管理画面</a>
 
-            <!-- Header Navbar -->
+            <!-- トップメニュー -->
             <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">{{ trans('adminlte::adminlte.toggle_navigation') }}</span>
-                </a>
-            @endif
-                <!-- Navbar Right Menu -->
-                <div class="navbar-custom-menu">
-
-                    <ul class="nav navbar-nav">
-                        <li>
-                            @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
-                                </a>
-                            @else
-                                <a href="#"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                >
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
-                                </a>
-                                <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
-                                    @if(config('adminlte.logout_method'))
-                                        {{ method_field(config('adminlte.logout_method')) }}
-                                    @endif
-                                    {{ csrf_field() }}
-                                </form>
-                            @endif
-                        </li>
-                    </ul>
-                </div>
-                @if(config('adminlte.layout') == 'top-nav')
-                </div>
-                @endif
+                <ul class="nav navbar-nav">
+                    <li><a href="">顧客管理</a></li>
+                </ul>
             </nav>
-        </header>
+
+        </header><!-- end header -->
 
         @if(config('adminlte.layout') != 'top-nav')
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
 
-            <!-- sidebar: style can be found in sidebar.less -->
+            {{-- 書き換える為、下記すべてを入れ替え --}}
             <section class="sidebar">
+                <ul class="sidebar-menu">
 
-                <!-- Sidebar Menu -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    {{-- $adminlte がundefineになる為、コメアウト --}}
-                    {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
+                    <!-- メニューヘッダ -->
+                    <li class="header">機能一覧</li>
+
+                    <!-- メニュー項目 -->
+                    <li><a href="">新規登録</a></li>
+
                 </ul>
-                <!-- /.sidebar-menu -->
             </section>
-            <!-- /.sidebar -->
+
         </aside>
         @endif
 
