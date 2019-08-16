@@ -12,17 +12,11 @@
 */
 
 Route::get('/', function () {
-    // starter.htmlのコピー（不十分）
-    // return view('mock.adminlte');
-    // vendor内のpage（パッケージから）
-    return view('vendor.adminlte.page');
+    return view('welcome');
 });
 
-Route::get('/other', function () {
-    // starter.htmlのコピー（不十分）
-    // return view('mock.adminlte');
-    // vendor内のpage（パッケージから）
-    return view('_layouts.default');
+Route::get('/mock_base', function () {
+    return view('mock_base');
 });
 // mock用ルーティング
 
