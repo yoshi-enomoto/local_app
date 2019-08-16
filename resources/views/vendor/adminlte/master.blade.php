@@ -17,7 +17,8 @@
 
     @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
+        {{-- 初期の状態から『https:』を付加する --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
     @endif
 
     <!-- Theme style -->
@@ -25,10 +26,12 @@
 
     @if(config('adminlte.plugins.datatables'))
         <!-- DataTables with bootstrap 3 style -->
-        <link rel="stylesheet" href="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css">
+        {{-- 初期の状態から『https:』を付加する --}}
+        <link rel="stylesheet" href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css">
     @endif
 
     @yield('adminlte_css')
+        {{-- 出力では『/css/admin_custom.css』になるので、独自に追加する用？ --}}
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -48,17 +51,20 @@
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    {{-- 初期の状態から『https:』を付加する --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 @endif
 
 @if(config('adminlte.plugins.datatables'))
     <!-- DataTables with bootstrap 3 renderer -->
-    <script src="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
+    {{-- 初期の状態から『https:』を付加する --}}
+    <script src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
 @endif
 
 @if(config('adminlte.plugins.chartjs'))
     <!-- ChartJS -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    {{-- 初期の状態から『https:』を付加する --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
 
 @yield('adminlte_js')
