@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mock_base', function () {
-    return view('mock_base');
+Route::get('/vendor_static_base', function () {
+    return view('vendor.adminlte.vendor_static_base');
 });
 
 Route::get('/default', function () {
