@@ -28,17 +28,25 @@ Route::get('/sample'.'{number?}', function($number = null) {
 // ————————————————————
 
 // vendorフォルダ内ルーティング
-// vendorフォルダ内のファイルで構成したページ
+// vendorフォルダ内のファイルで構成したページ（@extends('adminlte::page')）
 Route::get('/vendor_index', function () {
-    return view('vendor.adminlte.index');
+    return view('vendor.adminlte.vendor_index');
+});
+// vendor_static_base.blade をベースに、分割し直す。分割ファイルは、viewsフォルダ直下に保存--}}
+Route::get('/vendor_base', function () {
+    return view('vendor.adminlte.vendor_base');
 });
 // 1つにまとめたもの
 Route::get('/vendor_static_base', function () {
     return view('vendor.adminlte.vendor_static_base');
 });
-// 静的なベースを用いて各パーツごとに分けたもの
-Route::get('/vendor_base', function () {
-    return view('vendor.adminlte.vendor_base');
+// navのcollapseがdemo同様に閉じるバージョン
+Route::get('/vendor_static_base2', function () {
+    return view('vendor.adminlte.vendor_static_base2');
+});
+// 別バージョン
+Route::get('/vendor_static_base3', function () {
+    return view('vendor.adminlte.vendor_static_base3');
 });
 // ————————————————————
 
