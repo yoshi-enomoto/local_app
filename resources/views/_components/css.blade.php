@@ -22,7 +22,7 @@
 
 {{-- 下記の1行を yieldで導入するかしないかで変わる --}}
 <link rel="stylesheet"
-      href="{{ asset('vendor/adminlte/dist/css/skins/skin-yellow.min.css')}} ">
+      href="{{ asset('vendor/adminlte/dist/css/skins/skin-purple.min.css')}} ">
 
 @yield('adminlte_css')
     {{-- 出力では『/css/admin_custom.css』になるので、独自に追加する用？ --}}

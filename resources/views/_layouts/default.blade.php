@@ -6,8 +6,7 @@
 </head>
 
 {{-- <body class="hold-transition @yield('body_class')"> --}}
-<!-- <body class="skin-yellow"> -->
-<body class="skin-yellow">
+<body class="hold-transition skin-purple sidebar-mini">
     <div class="wrapper">
         <!-- トップメニュー -->
         <header class="main-header">
