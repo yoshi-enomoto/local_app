@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/skins/skin-green.min.css')}} ">
 @endsection
 
-{{--  --}}
+{{-- クラス追加 --}}
 @section('body_class',
      'skin-green' . ' sidebar-mini ' . (config('adminlte.collapse_sidebar') ? ' sidebar-collapse ' : ''))
 
