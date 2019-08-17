@@ -1,14 +1,27 @@
 {{-- vendor_static_base.blade をベースに分割して、このファイルから呼び出す--}}
+{{-- このファイルを手本に他を作成する--}}
 @extends('_layouts.default')
+
+@section('title_prefix')
+    title_prefix |
+@endsection
+@section('title')
+    main_title |
+@endsection
+@section('title_postfix')
+    title_postfix
+@endsection
 
 @section('content')
     <!-- コンテンツヘッダ -->
     <section class="content-header">
-        <h1>ページタイトル</h1>
+        {{-- <h1>ページタイトル</h1> --}}
+        <h1>@yield('title_postfix')</h1>
         <!-- パンくずリスト -->
         <ol class="breadcrumb">
             <li><a href="">Home</a></li>
-            <li>現在地</li>
+            {{-- <li>現在地</li> --}}
+            <li>@yield('title_postfix')</li>
         </ol>
     </section>
 
