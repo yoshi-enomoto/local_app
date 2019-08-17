@@ -15,6 +15,15 @@
 <!-- ページの内容を入力 -->
 @section('content')
     <p>Welcome to this beautiful admin panel.</p>
+    <!-- コンテンツ1 -->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">ボックスタイトル</h3>
+        </div>
+        <div class="box-body">
+            <p>ボックスボディー</p>
+        </div>
+    </div>
 @stop
 
 <!-- 読み込ませるCSSを入力 -->
