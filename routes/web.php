@@ -11,21 +11,33 @@
 |
 */
 
+// 通常用
 Route::get('/', function () {
     return view('welcome');
 });
+// ————————————————————
+
+// サンプル用（samplesフォルダ内）
+Route::get('/sample'.'{number?}', function($number = null) {
+    if(!empty($number)) {
+        return view('samples.sample' . $number);
+    } else {
+        return view('welcome');
+    }
+});
+// ————————————————————
 
 // 静的なベース
 Route::get('/vendor_static_base', function () {
     return view('vendor.adminlte.vendor_static_base');
 });
-
 // 静的なベースを用いて各パーツごとに分けたもの
 Route::get('/vendor_base', function () {
     return view('vendor.adminlte.vendor_base');
 });
-// mock用ルーティング
+// ————————————————————
 
+// mock用ルーティング
 Route::get('mock/categories/{page?}', function ($page = null) {
     if(!empty($page)) {
         return view('mock.categories.' . $page);
