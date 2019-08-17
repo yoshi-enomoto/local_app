@@ -1,4 +1,4 @@
-{{-- vendor_static_base.blade をベースに分割して、このファイルから呼び出す--}}
+{{-- vendor_static_base.blade をベースに、分割し直す。分割ファイルは、viewsフォルダ直下に保存--}}
 {{-- このファイルを手本に他を作成する--}}
 @extends('_layouts.default')
 

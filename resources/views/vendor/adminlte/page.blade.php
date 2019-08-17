@@ -18,6 +18,7 @@
 
         <!-- Main Header -->
         <header class="main-header">
+            {{-- 「@else」のレイアウトになっている為、『menu-item-top-nav』は使われていない --}}
             @if(config('adminlte.layout') == 'top-nav')
             <nav class="navbar navbar-static-top">
                 <div class="container">
@@ -34,9 +35,11 @@
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">
                             @each('adminlte::partials.menu-item-top-nav', $adminlte->menu(), 'item')
+                                {{-- コマンドにより生成したファイル『adminlte.php』の中の該当部分を見にいっている。表示されている。『1』 --}}
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
+            {{-- 『2』のレイアウトが使用されている。 --}}
             @else
             <!-- Logo -->
             <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="logo">
@@ -94,6 +97,7 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
+                        {{-- コマンドにより生成したファイル『adminlte.php』の中の該当部分を見にいっている。表示されている。『2』 --}}
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

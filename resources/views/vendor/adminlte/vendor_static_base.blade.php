@@ -1,3 +1,4 @@
+{{-- vendorファイル内の分割ファイルを1つにまとめたもの --}}
 <!DOCTYPE html>
 <html>
 <head>

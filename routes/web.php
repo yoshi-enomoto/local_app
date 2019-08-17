@@ -27,7 +27,12 @@ Route::get('/sample'.'{number?}', function($number = null) {
 });
 // ————————————————————
 
-// 静的なベース
+// vendorフォルダ内ルーティング
+// vendorフォルダ内のファイルで構成したページ
+Route::get('/vendor_index', function () {
+    return view('vendor.adminlte.index');
+});
+// 1つにまとめたもの
 Route::get('/vendor_static_base', function () {
     return view('vendor.adminlte.vendor_static_base');
 });
