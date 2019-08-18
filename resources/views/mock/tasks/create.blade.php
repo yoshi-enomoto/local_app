@@ -1,7 +1,7 @@
 @extends('_layouts.default')
 
 @section('title_prefix')
-    カテゴリー登録
+    タスク登録
 @endsection
 @section('title', '')
 
@@ -26,19 +26,24 @@
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">
-                            カテゴリー名
-                        </label>
+                        <label class="col-md-3 control-label">カテゴリー名</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" name="name" value="">
+                            <select class="form-control" name="">
+                                <option value="" selected>カテゴリーを選択</option>
+                                <option value="">新規案件1</option>
+                                <option value="">既存案件9</option>
+                                <option value="">その他雑務</option>
+                                <option value="">新規案件2</option>
+                                <option value="">新規案件3</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            イメージカラー
+                            タスク名
                         </label>
                         <div class="col-md-9">
-                            <input class="form-control" type="color" name="color" value="">
+                            <input class="form-control" type="text" name="name" value="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,7 +55,7 @@
             </form>
 
             <div class="box-footer">
-                <a href="{{ route('mock_categories', ['index']) }}" class="btn btn-sm btn-default">カテゴリー一覧へ戻る</a>
+                <a href="{{ route('mock_tasks', ['index']) }}" class="btn btn-sm btn-default">タスク一覧へ戻る</a>
             </div>
         </div>
     </section>
