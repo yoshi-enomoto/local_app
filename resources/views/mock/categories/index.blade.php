@@ -1,26 +1,17 @@
-{{-- ベース--}}
 @extends('_layouts.default')
 
 @section('title_prefix')
-    title_prefix |
+    カテゴリー一覧
 @endsection
-@section('title')
-    main_title |
-@endsection
-@section('title_postfix')
-    categories.index.blade
-@endsection
+@section('title', '')
 
 @section('content')
     <!-- コンテンツヘッダ -->
     <section class="content-header">
-        {{-- <h1>ページタイトル</h1> --}}
-        <h1>@yield('title_postfix')</h1>
-        <!-- パンくずリスト -->
+        <h1>@yield('title_prefix')</h1>
         <ol class="breadcrumb">
-            <li><a href="">Home</a></li>
-            {{-- <li>現在地</li> --}}
-            <li>@yield('title_postfix')</li>
+            <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
+            <li>@yield('title_prefix')</li>
         </ol>
     </section>
 
@@ -29,37 +20,130 @@
         <!-- コンテンツ1 -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">ボックスタイトル</h3>
+                <h3 class="box-title">一覧</h3>
+                <div class="box-tools">
+                    <a href="{{ route('mock_categories', ['create']) }}" class="btn btn-sm btn-primary">登録</a>
+                </div>
             </div>
             <div class="box-body">
-                <p>ボックスボディー</p>
-            </div>
-        </div>
-        <!-- コンテンツ2 -->
-        <div class="row">
-            <!-- col -->
-            <div class="col-xs-6">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">ボックスタイトル左</h3>
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 50%;">カテゴリー名</th>
+                            <th style="width: 15%;">イメージカラー</th>
+                            <th style="width: 30%;"></th>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">1</td>
+                            <td style="vertical-align: middle;">新規案件1</td>
+                            <td style="vertical-align: middle;">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar" style="width: 100%; background-color: #ff0000">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">2</td>
+                            <td style="vertical-align: middle;">既存案件9</td>
+                            <td style="vertical-align: middle;">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar" style="width: 100%; background-color: #ffff00">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">3</td>
+                            <td style="vertical-align: middle;">その他雑務</td>
+                            <td style="vertical-align: middle;">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar" style="width: 100%; background-color: #3FD300">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                            </td>
+                        <tr>
+                            <td style="vertical-align: middle;">4</td>
+                            <td style="vertical-align: middle;">新規案件2</td>
+                            <td style="vertical-align: middle;">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar" style="width: 100%; background-color: #ff0000">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle;">5</td>
+                            <td style="vertical-align: middle;">新規案件3</td>
+                            <td style="vertical-align: middle;">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar" style="width: 100%; background-color: #ff0000">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                            </td>
+                        </tr>
+                        </tr>
+                      </tbody>
+                </table>
+{{--                 <div class="form-group">
+                    <label class="col-md-3 control-label">テキスト</label>
+                    <div class="col-md-9">
+                        <p class="form-control-static">DBに保存されている内容</p>
                     </div>
-                    <div class="box-body">
-                        <p>ボックスボディ</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- col -->
-            <div class="col-xs-6">
-                <div class="box box-danger">
-                    <div class="box-header">
-                        <h3 class="box-title">ボックスタイトル右</h3>
-                    </div>
-                    <div class="box-body">
-                        <p>ボックスボディ</p>
-                    </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
+
+    {{-- 削除モーダル --}}
+    <div class="modal fade" id="deleteModal_number">
+        <div class="modal-dialog">
+            {{-- <form action="#" method="POST" accept-charset="utf-8"> --}}
+            <form>
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                        <h4 class="modal-title">削除</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>〜〜〜を一覧から削除します。本当によろしいですか？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">キャンセル</button>
+                        <button type="submit" class="btn btn-sm btn-danger" data-dissmiss="modal">削除する</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
