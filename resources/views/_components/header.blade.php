@@ -1,5 +1,5 @@
 <!-- ロゴ -->
-<a href="" class="logo">管理画面</a>
+<a href="{{ route('mock', ['home']) }}" class="logo">管理画面</a>
 
 <!-- トップメニュー -->
 <nav class="navbar navbar-static-top" role="navigation">
