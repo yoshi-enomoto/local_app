@@ -14,7 +14,7 @@
         <ol class="breadcrumb">
             <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
             <li><a href="{{ route('mock_categories', ['index']) }}">カテゴリー一覧</a></li>
-            <li>@yield('title_prefix')：新規案件1</li>
+            <li>@yield('title_prefix')@yield('title')</li>
         </ol>
     </section>
 

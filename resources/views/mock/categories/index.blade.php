@@ -111,12 +111,6 @@
                         </tr>
                       </tbody>
                 </table>
-{{--                 <div class="form-group">
-                    <label class="col-md-3 control-label">テキスト</label>
-                    <div class="col-md-9">
-                        <p class="form-control-static">DBに保存されている内容</p>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </section>
