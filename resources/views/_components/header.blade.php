@@ -11,7 +11,7 @@
             <span class="sr-only">Toggle navigation</span>
         </a>
 
-        <ul class="nav navbar-nav">
+{{--         <ul class="nav navbar-nav">
             <li><a href="">顧客管理</a></li>
             <li><a href="">売上管理</a></li>
             <li class="dropdown">
@@ -21,7 +21,7 @@
                     <li><a href="">その他2</a></li>
                 </ul>
             </li>
-        </ul>
+        </ul> --}}
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
