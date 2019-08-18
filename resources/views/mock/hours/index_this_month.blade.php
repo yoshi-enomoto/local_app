@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-
+                    {{-- show_month.blade.phpでも同じものを使用 --}}
                     <table class="table table-bordered table-hover">
                         <tbody>
                             <tr>

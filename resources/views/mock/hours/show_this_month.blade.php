@@ -13,7 +13,7 @@
         <h1>@yield('title_prefix')</h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
-            <li><a href="{{ route('mock_categories', ['index']) }}">当月一覧</a></li>
+            <li><a href="{{ route('mock_hours', ['index_this_month']) }}">当月一覧</a></li>
             <li>@yield('title_prefix')@yield('title')</li>
         </ol>
     </section>
