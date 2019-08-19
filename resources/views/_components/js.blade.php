@@ -1,6 +1,12 @@
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+
+<!-- bootstrap datepicker：導入練習用2/3 -->
+<script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
+
 <!-- adminLTE -->
 {{-- 下記がないとサイドバーが展開しない --}}
 <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
@@ -22,5 +28,18 @@
     {{-- 初期の状態から『https:』を付加する --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
+
+
+<!-- bootstrap datepicker：導入練習用3/3 -->
+<script type="text/javascript">
+//Date picker
+$('#datepicker').datepicker({
+  autoclose: true
+})
+//Timepicker
+$('.timepicker').timepicker({
+  showInputs: false
+})
+</script>
 
 @yield('adminlte_js')

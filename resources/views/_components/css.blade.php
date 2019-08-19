@@ -5,6 +5,11 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
+
+<!-- bootstrap datepicker：導入練習用1/3 -->
+<link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap-datepicker.min.css') }}">
+
+
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
     {{-- 初期の状態から『https:』を付加する --}}

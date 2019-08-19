@@ -32,6 +32,7 @@
                         </label>
                         <div class="col-md-9">
                             <input class="form-control" type="date" name="name" value="">
+                            {{-- <input class="form-control" type="text" name="name" value="" id="datepicker"> --}}
                         </div>
                     </div>
                 </div>
