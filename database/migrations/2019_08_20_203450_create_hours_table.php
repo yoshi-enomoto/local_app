@@ -16,8 +16,7 @@ class CreateHoursTable extends Migration
         Schema::create('hours', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
-            $table->decimal('hour', 5, 3 );
-                // 要確認！
+            $table->decimal('hour', 5, 3 )->comment('固定小数点（全体5桁、小数点以下3桁）');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('task_id')->nullable();
             $table->softDeletes();
