@@ -32,6 +32,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="name">
                             カテゴリー名
+                            <span class="label label-danger">必須</span>
                         </label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="name" id="name">
@@ -40,6 +41,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="color">
                             イメージカラー
+                            <span class="label label-danger">必須</span>
                         </label>
                         <div class="col-md-9">
                             <input class="form-control" type="color" name="color" id="color">
