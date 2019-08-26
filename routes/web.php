@@ -15,6 +15,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/categories', 'CategoryController');
+// resourceで生成していると、nameメソッドなくても付与されている？
+
 // ————————————————————
 
 // サンプル用（samplesフォルダ内）
