@@ -13,7 +13,8 @@
 
 // 通常用
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('dashboard');
 });
 
 Route::resource('/categories', 'CategoryController');
