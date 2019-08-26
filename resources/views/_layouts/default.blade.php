@@ -20,7 +20,7 @@
 
         <!-- content -->
         <div class="content-wrapper">
-            @include('_components.message')
+            {{-- @include('_components.message')：wip整備のし直し --}}
             @yield('content')
         </div><!-- end content -->
 
