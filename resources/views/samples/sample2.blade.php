@@ -26,8 +26,9 @@
 @section('body_class',
      'skin-green' . ' sidebar-mini ' . (config('adminlte.collapse_sidebar') ? ' sidebar-collapse ' : ''))
 
+<!-- コンテンツヘッダエリア -->
 @section('content-header')
-    <!-- コンテンツヘッダ -->
+    <!-- ヘッダ -->
     {{-- <h1>ページタイトル</h1> --}}
     <h1>@yield('title_postfix')</h1>
     <!-- パンくずリスト -->
@@ -38,8 +39,8 @@
     </ol>
 @endsection
 
+<!-- メインコンテンツ（同階層で上にフラッシュメッセージエリアがくる -->
 @section('content-body')
-    <!-- メインコンテンツ（同階層で上にフラッシュメッセージエリアがくる -->
     <!-- コンテンツ1 -->
     <div class="box">
         <div class="box-header with-border">
