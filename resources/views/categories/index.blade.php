@@ -67,7 +67,7 @@
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>&times;</span>
                             </button>
-                            <h4 class="modal-title">削除</h4>
+                            <h4 class="modal-title">カテゴリー削除</h4>
                         </div>
                         <div class="modal-body">
                             <p>『{{ $category->name }}』を一覧から削除します。本当によろしいですか？</p>
