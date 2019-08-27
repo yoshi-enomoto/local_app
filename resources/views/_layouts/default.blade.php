@@ -18,11 +18,17 @@
             @include('_components.aside')
         </aside>
 
-        <!-- content -->
+        <!-- コンテンツ -->
         <div class="content-wrapper">
-            {{-- @include('_components.message')：wip整備のし直し --}}
+            <section class="content-header">
+                @yield('content-header')
+            </section>
+            <section class="content">
+                @include('_components.message')
+                @yield('content-body')
+            </section>
             @yield('content')
-        </div><!-- end content -->
+        </div>
 
         <!-- フッター -->
         <footer class="main-footer">

@@ -5,50 +5,48 @@
 @endsection
 @section('title', '')
 
-@section('content')
-    <!-- コンテンツヘッダ -->
-    <section class="content-header">
-        <h1>@yield('title_prefix')</h1>
-        <!-- パンくずリスト -->
-        <ol class="breadcrumb">
-            <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
-            <li>@yield('title_prefix')</li>
-        </ol>
-    </section>
+<!-- コンテンツヘッダ -->
+@section('content-header')
+    <h1>@yield('title_prefix')</h1>
+    <!-- パンくずリスト -->
+    <ol class="breadcrumb">
+        <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
+        <li>@yield('title_prefix')</li>
+    </ol>
+@endsection
 
-    <!-- メインコンテンツ -->
-    <section class="content">
-        <form class="form-horizontal">
-            <!-- コンテンツ1 -->
-            <div class="box box-warning">
-                <div class="box-header with-border">
-                    <h3 class="box-title">一覧</h3>
-                </div>
-                <div class="box-body">
-                    <table class="table table-bordered table-hover">
-                        <tbody>
-                            <tr>
-                                <th style="width: 10%;">月</th>
-                                <th style="width: 60%;">総時間数</th>
-                                <th style="width: 30%;"></th>
-                            </tr>
-                            @for($i=1; $i<8; $i++)
-                                <tr>
-                                    <td style="vertical-align: middle;">{{ $i }}月</td>
-                                    <td style="vertical-align: middle;">{{ rand(1700, 2000) / 10 }}h</td>
-                                    <td>
-                                        <a href="{{ route('mock_hours', ['show_month']) }}" class="btn btn-sm btn-success">詳細</a>
-                                        <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                                    </td>
-                                </tr>
-                            @endfor
-                          </tbody>
-                    </table>
-                </div>
+<!-- メインコンテンツ -->
+@section('content-body')
+    <form class="form-horizontal">
+        <!-- コンテンツ1 -->
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">一覧</h3>
             </div>
-        </form>
-    </section>
+            <div class="box-body">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <th style="width: 10%;">月</th>
+                            <th style="width: 60%;">総時間数</th>
+                            <th style="width: 30%;"></th>
+                        </tr>
+                        @for($i=1; $i<8; $i++)
+                            <tr>
+                                <td style="vertical-align: middle;">{{ $i }}月</td>
+                                <td style="vertical-align: middle;">{{ rand(1700, 2000) / 10 }}h</td>
+                                <td>
+                                    <a href="{{ route('mock_hours', ['show_month']) }}" class="btn btn-sm btn-success">詳細</a>
+                                    <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                                </td>
+                            </tr>
+                        @endfor
+                      </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
 
     {{-- 削除モーダル --}}
     <div class="modal fade" id="deleteModal_number">
