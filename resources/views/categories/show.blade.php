@@ -7,77 +7,71 @@
     {{ $category->name }}
 @endsection
 
-@section('content')
-    <!-- コンテンツヘッダ -->
-    <section class="content-header">
-        <h1>@yield('title_prefix')</h1>
-        <ol class="breadcrumb">
-            <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
-            <li><a href="{{ route('categories.index') }}">カテゴリー一覧</a></li>
-            <li>@yield('title_prefix')@yield('title')</li>
-        </ol>
-    </section>
+<!-- コンテンツヘッダ -->
+@section('content-header')
+    <h1>@yield('title_prefix')</h1>
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="{{ route('categories.index') }}">カテゴリー一覧</a></li>
+        <li>@yield('title_prefix')@yield('title')</li>
+    </ol>
+@endsection
 
-    <!-- メインコンテンツ -->
-    <section class="content">
-        {{-- フラッシュメッセージ --}}
-        @include('_components.message')
-            {{-- ここに入れないと、コンテンツ目一杯広がってしまう：wip --}}
-
-        <!-- コンテンツ1 -->
-        <div class="box box-success">
-            <div class="box-header with-border">
-                <h3 class="box-title">@yield('title')</h3>
-                <div class="box-tools">
-                    登録
-                    {{-- <a href="{{ route('tasks_create') }}" class="btn btn-sm btn-primary">登録</a> --}}
-                </div>
-            </div>
-            <div class="box-body">
-                <table class="table table-bordered table-hover">
-                    <tbody>
-                        <tr>
-                            <th style="width: 5%;" class="text-center">#</th>
-                            <th style="width: 50%;">タスク名</th>
-                            <th style="width: 30%;"></th>
-                        </tr>
-
-                        {{-- wip --}}
-                        <tr>
-                            <td style="vertical-align: middle;">1</td>
-                            <td style="vertical-align: middle;">客先ミーティング</td>
-                            <td>
-                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
-                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: middle;">2</td>
-                            <td style="vertical-align: middle;">ドラフト作成</td>
-                            <td>
-                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
-                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: middle;">3</td>
-                            <td style="vertical-align: middle;">社内打ち合わせ</td>
-                            <td>
-                                <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
-                                <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                            </td>
-                        </tr>
-                      </tbody>
-                </table>
-            </div>
-            <div class="box-footer">
-                <a href="{{ route('categories.index') }}" class="btn btn-sm btn-default">カテゴリー一覧へ戻る</a>
+<!-- メインコンテンツ -->
+@section('content-body')
+    <!-- コンテンツ1 -->
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">@yield('title')</h3>
+            <div class="box-tools">
+                登録
+                {{-- <a href="{{ route('tasks_create') }}" class="btn btn-sm btn-primary">登録</a> --}}
             </div>
         </div>
-    </section>
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <th style="width: 5%;" class="text-center">#</th>
+                        <th style="width: 50%;">タスク名</th>
+                        <th style="width: 30%;"></th>
+                    </tr>
+
+                    {{-- wip --}}
+                    <tr>
+                        <td style="vertical-align: middle;">1</td>
+                        <td style="vertical-align: middle;">客先ミーティング</td>
+                        <td>
+                            <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                            <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">2</td>
+                        <td style="vertical-align: middle;">ドラフト作成</td>
+                        <td>
+                            <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                            <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">3</td>
+                        <td style="vertical-align: middle;">社内打ち合わせ</td>
+                        <td>
+                            <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
+                            <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
+                        </td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('categories.index') }}" class="btn btn-sm btn-default">カテゴリー一覧へ戻る</a>
+        </div>
+    </div>
 
     {{-- 削除モーダル --}}
     <div class="modal fade" id="deleteModal_number">
