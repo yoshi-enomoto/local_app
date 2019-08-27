@@ -6,3 +6,14 @@
             {{ session('success') }}
     </div>
 @endif
+
+{{-- 各inputに出したバリデメッセージを上部に出す方法 --}}
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
