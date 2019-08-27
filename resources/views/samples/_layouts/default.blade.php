@@ -20,11 +20,16 @@
             @include('samples._components.aside')
         </aside>
 
-        <!-- content -->
+        <!-- コンテンツ -->
         <div class="content-wrapper">
-            @include('samples._components.message')
-            @yield('content')
-        </div><!-- end content -->
+            <section class="content-header">
+                @yield('content-header')
+            </section>
+            <section class="content">
+                @include('samples._components.message')
+                @yield('content-body')
+            </section>
+        </div>
 
         <!-- フッター -->
         <footer class="main-footer">
