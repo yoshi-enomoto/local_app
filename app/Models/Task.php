@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Task extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-      'color',
+      'category_id',
       'name',
     ];
 
@@ -18,8 +18,8 @@ class Category extends Model
       'deleted_at',
     ];
 
-    public function Tasks()
+    public function category()
     {
-        return $this->hasMany('App\Models\Task');
+        return $this->belongsTo('App\Models\Category');
     }
 }
