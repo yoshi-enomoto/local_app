@@ -1,7 +1,7 @@
 @extends('_layouts.default')
 
 @section('title_prefix')
-    詳細：
+    カテゴリー詳細：
 @endsection
 @section('title')
     {{ $category->name }}

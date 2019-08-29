@@ -1,7 +1,7 @@
 @extends('_layouts.default')
 
 @section('title_prefix')
-    カテゴリー登録
+    カテゴリー編集
 @endsection
 @section('title', '')
 
@@ -19,12 +19,14 @@
     <!-- コンテンツ1 -->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">登録</h3>
+            <h3 class="box-title">編集</h3>
         </div>
         <div class="box-body">
             @include('categories._components.form', [
-                'action' => route('categories.store'),
-                'button' => '登録する'
+                'category' => $category,
+                // 'method' => method_field('PUT'),
+                'action' => route('categories.update', $category->id),
+                'button' => '更新する',
             ])
         </div>
         <div class="box-footer">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -38,15 +39,21 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        // dd($request->all());
         // dd($request->input('color'));
         // dd($request);
-        // dd($request->all());
 
-        Category::create($request->all());
+        // $category = new Category();
+        // $category->name = $request->name;
+        // $category->color = $request->color;
+        // $category->save();
+
         // Category::create([
         //     'name'  => $request->input('name'),
         //     'color' => $request->input('color'),
         // ]);
+
+        Category::create($request->all());
 
         //
         // return redirect();
@@ -69,24 +76,37 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        // dd($request->all());
+
+        // $category->name  = $request->input('name');
+        // $category->color = $request->input('color');
+        // $category->save();
+
+        // $category->update([
+        //     'name'  => $request->input('name'),
+        //     'color' => $request->input('color'),
+        // ]);
+
+        $category->update($request->all());
+
+        return redirect()->route('categories.index')->with('success', 'カテゴリーを更新しました。');
     }
 
     /**
@@ -97,8 +117,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
         // Category::destroy($category->id);
+
+        $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'カテゴリーを削除しました。');
     }
