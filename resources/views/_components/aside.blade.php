@@ -13,8 +13,8 @@
         <li class="treeview">
             <a href="#"><i class="fa fa-star"></i><span>タスク管理</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-                <li><a href="{{ route('mock_tasks', ['index']) }}"><i class="fa fa-circle-o"></i>タスク一覧</a></li>
-                <li><a href="{{ route('mock_tasks', ['create']) }}"><i class="fa fa-circle-o"></i>タスク登録</a></li>
+                <li><a href="{{ route('tasks.index') }}"><i class="fa fa-circle-o"></i>タスク一覧</a></li>
+                <li><a href="{{ route('tasks.create') }}"><i class="fa fa-circle-o"></i>タスク登録</a></li>
             </ul>
         </li>
         <li class="treeview">

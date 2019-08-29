@@ -24,8 +24,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">@yield('title')</h3>
             <div class="box-tools">
-                登録
-                {{-- <a href="{{ route('tasks_create') }}" class="btn btn-sm btn-primary">登録</a> --}}
+                <a href="{{ route('tasks.create', ['category_id' => $category->id]) }}" class="btn btn-sm btn-primary">登録</a>
             </div>
         </div>
         <div class="box-body">
@@ -36,35 +35,17 @@
                         <th style="width: 50%;">タスク名</th>
                         <th style="width: 30%;"></th>
                     </tr>
-
-                    {{-- wip --}}
-                    <tr>
-                        <td style="vertical-align: middle;">1</td>
-                        <td style="vertical-align: middle;">客先ミーティング</td>
-                        <td>
-                            <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
-                            <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: middle;">2</td>
-                        <td style="vertical-align: middle;">ドラフト作成</td>
-                        <td>
-                            <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
-                            <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: middle;">3</td>
-                        <td style="vertical-align: middle;">社内打ち合わせ</td>
-                        <td>
-                            <a href="{{ route('mock_categories', ['show']) }}" class="btn btn-sm btn-success">詳細</a>
-                            <a href="{{ route('mock_categories', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                        </td>
-                    </tr>
+                    @foreach($category->tasks as $task)
+                        <tr>
+                            <td style="vertical-align: middle;">{{ $task->id }}</td>
+                            <td style="vertical-align: middle;">{{ $task->name }}</td>
+                            <td>
+                                {{-- <a href="{{ route('tasks.show', $task) }}" class="btn btn-sm btn-success">詳細</a> --}}
+                                <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-primary">編集</a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $task->id }}">削除</a>
+                            </td>
+                        </tr>
+                    @endforeach
                   </tbody>
             </table>
         </div>
@@ -74,28 +55,29 @@
     </div>
 
     {{-- 削除モーダル --}}
-    <div class="modal fade" id="deleteModal_number">
-        <div class="modal-dialog">
-            {{-- <form action="#" method="POST" accept-charset="utf-8"> --}}
-            <form>
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                        <h4 class="modal-title">削除</h4>
+    @foreach($category->tasks as $task)
+        <div class="modal fade" id="deleteModal_{{ $task->id }}" data-keyboard="true" tabindex="-1">
+            <div class="modal-dialog">
+                <form action="{{ route('tasks.destroy', $task) }}" method="POST" accept-charset="utf-8">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title">タスク削除</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>『{{ $task->name }}』を一覧から削除します。本当によろしいですか？</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">キャンセル</button>
+                            <button type="submit" class="btn btn-sm btn-danger" data-dissmiss="modal">削除する</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>〜〜〜を一覧から削除します。本当によろしいですか？</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">キャンセル</button>
-                        <button type="submit" class="btn btn-sm btn-danger" data-dissmiss="modal">削除する</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    @endforeach
 @endsection

@@ -21,5 +21,8 @@ class Category extends Model
     public function Tasks()
     {
         return $this->hasMany('App\Models\Task');
+          // 定義することで、
+          // メソッドで繋げるとHasManyクラス、
+          // プロパティで繋げるとCollectionクラスが取得できる。
     }
 }

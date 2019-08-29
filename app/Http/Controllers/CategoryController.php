@@ -70,6 +70,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        // dd($category->tasks()->select('id', 'name')->get(), $category->tasks);
         return view('categories.show', compact('category'));
     }
 
