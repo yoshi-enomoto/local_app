@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::resource('/categories', 'CategoryController');
 // resourceで生成していると、nameメソッドなくても付与されている？
-Route::resource('/tasks', 'TaskController');
+Route::resource('/tasks', 'TaskController', ['except' => 'show']);
 
 // ————————————————————
 

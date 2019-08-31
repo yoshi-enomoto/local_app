@@ -1,7 +1,7 @@
 @extends('_layouts.default')
 
 @section('title_prefix')
-    タスク登録
+    タスク編集
 @endsection
 @section('title', '')
 
@@ -19,12 +19,13 @@
     <!-- コンテンツ1 -->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">登録</h3>
+            <h3 class="box-title">編集</h3>
         </div>
         <div class="box-body">
             @include('tasks._components.form', [
-                'action' => route('tasks.store'),
-                'button' => '登録する',
+                'task' => $task,
+                'action' => route('tasks.update', $task->id),
+                'button' => '更新する',
             ])
         </div>
         <div class="box-footer">

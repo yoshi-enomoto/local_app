@@ -35,9 +35,10 @@
                         <th style="width: 50%;">タスク名</th>
                         <th style="width: 30%;"></th>
                     </tr>
-                    @foreach($category->tasks as $task)
+                    @foreach($category->tasks as $key => $task)
                         <tr>
-                            <td style="vertical-align: middle;">{{ $task->id }}</td>
+                            <td style="vertical-align: middle;">{{ $key + 1 }}</td>
+                                {{-- id値を番号として振ると、削除された時に歯抜けになる！ --}}
                             <td style="vertical-align: middle;">{{ $task->name }}</td>
                             <td>
                                 {{-- <a href="{{ route('tasks.show', $task) }}" class="btn btn-sm btn-success">詳細</a> --}}
