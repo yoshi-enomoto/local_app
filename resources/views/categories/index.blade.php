@@ -54,31 +54,12 @@
             </table>
         </div>
     </div>
-
     {{-- 削除モーダル --}}
-    @foreach($categories as $category)
-        <div class="modal fade" id="deleteModal_{{ $category->id }}" data-keyboard="true" tabindex="-1">
-            <div class="modal-dialog">
-                <form action="{{ route('categories.destroy', $category) }}" method="POST" accept-charset="utf-8">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                            <h4 class="modal-title">カテゴリー削除</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>『{{ $category->name }}』を一覧から削除します。本当によろしいですか？</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">キャンセル</button>
-                            <button type="submit" class="btn btn-sm btn-danger" data-dissmiss="modal">削除する</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endforeach
+    @include('_components.modal_delete', [
+        'array' => $categories,
+        'classify' => 'categories.',
+        'action' => 'destroy',
+        'title' => 'カテゴリー削除',
+        'body' => 'を一覧から削除します。本当によろしいですか？',
+    ])
 @endsection
