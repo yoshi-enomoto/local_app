@@ -10,6 +10,7 @@
     <h1>@yield('title_prefix')</h1>
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
+        <li><a href="{{ route('tasks.index') }}">タスク一覧</a></li>
         <li>@yield('title_prefix')</li>
     </ol>
 @endsection
@@ -29,7 +30,8 @@
             ])
         </div>
         <div class="box-footer">
-            <a href="{{ route('tasks.index') }}" class="btn btn-sm btn-default">タスク一覧へ戻る</a>
+            {{-- <a href="{{ route('tasks.index') }}" class="btn btn-sm btn-default">タスク一覧へ戻る</a> --}}
+            <a href="{{ $previous_url }}" class="btn btn-sm btn-default">前のページへ戻る</a>
         </div>
     </div>
 @endsection

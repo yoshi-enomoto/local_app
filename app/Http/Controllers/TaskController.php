@@ -61,12 +61,16 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        $previous_url = url()->previous();
+        // セッションへデータ保存
+        session()->put('previous_url', $previous_url);
+
         //
         $category_id = $task->category->id;
 
         $categories = Category::all();
 
-        return view('tasks.edit', compact('task', 'category_id', 'categories'));
+        return view('tasks.edit', compact('task', 'category_id', 'categories', 'previous_url'));
     }
 
     /**
@@ -79,11 +83,12 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $task->update($request->all());
+        // セッションへ保存したデータを取り出す。
+        $previous_url = session()->pull('previous_url');
 
-        return back()->with('success', 'タスクを更新しました。');
-
-        // if文でreturn を変える。（前に記事で出来ないって読んだ気が。。。）
-
+        // return back()->with('success', 'タスクを更新しました。');
+        return redirect()->away($previous_url)->with('success', 'タスクを更新しました。');
+            // 外部ドメインへのリダイレクト用の記述
     }
 
     /**
