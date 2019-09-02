@@ -26,6 +26,6 @@ class Task extends Model
     // nullの場合も考えられるので、一旦コメアウト
     public function hours()
     {
-        // return $this->hasMany('App\Models\Hours');
+        // return $this->hasMany('App\Models\Hour');
     }
 }

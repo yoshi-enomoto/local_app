@@ -28,6 +28,6 @@ class Category extends Model
 
     public function hours()
     {
-        return $this->hasMany('App\Models\Hours');
+        return $this->hasMany('App\Models\Hour');
     }
 }
