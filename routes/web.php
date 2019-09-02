@@ -21,6 +21,8 @@ Route::resource('/categories', 'CategoryController');
 // resourceで生成していると、nameメソッドなくても付与されている？
 Route::resource('/tasks', 'TaskController', ['except' => 'show']);
 
+Route::resource('/hours', 'HourController');
+
 // ————————————————————
 
 // サンプル用（samplesフォルダ内）
