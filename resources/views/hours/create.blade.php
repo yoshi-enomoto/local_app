@@ -3,6 +3,7 @@
 @section('title_prefix')
     時間入力
 @endsection
+
 @section('title', '')
 
 <!-- コンテンツヘッダエリア -->
@@ -39,7 +40,7 @@
                             カテゴリー/タスク/時間{{ $i+1 }}
                         </label>
                         <div class="col-md-3">
-                            <select class="form-control" name="category_id[]">
+                            <select class="form-control parent" name="category_id[]">
                                 <option value="" selected>カテゴリーを選択</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -47,10 +48,10 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select class="form-control" name="task_id[]">
+                            <select class="form-control children" name="task_id[]" disabled>
                                 <option value="" selected>タスクを選択</option>
                                 @foreach($tasks as $task)
-                                    <option value="{{ $task->id }}">{{ $task->name }}</option>
+                                    <option value="{{ $task->id }}" data-val="{{ $task->category->id }}">{{ $task->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -70,4 +71,32 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('unique_js')
+    <script type="text/javascript">
+        var $children = $('.children');  // カテゴリーの要素を変数に入れる
+        var original = $children.html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+
+        // カテゴリーのselect要素が変更になるとイベントが発生
+        $('.parent').change(function() {
+            // カテゴリーのvalueを取得して変数に入れる
+            var val1 = $(this).val();
+            // 削除された要素をもとに戻すため.html(original)を入れておく
+            $children.html(original).find('option').each(function() {
+                var val2 = $(this).data('val'); // data-valの値を取得
+                // valueと異なるdata-valを持つ要素を削除
+                if (val1 != val2) {
+                    $(this).not(':first-child').remove();
+                }
+            });
+
+            // カテゴリーのselect要素が未選択の場合、タスクをdisabledにする
+            if ($(this).val() == "") {
+                $children.attr('disabled', 'disabled');
+            } else {
+                $children.removeAttr('disabled');
+            }
+        });
+    </script>
 @endsection

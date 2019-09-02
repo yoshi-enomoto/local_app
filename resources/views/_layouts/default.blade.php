@@ -37,5 +37,6 @@
     </div>
     <!-- js -->
     @include('_components.js')
+    @yield('unique_js')
 </body>
 </html>
