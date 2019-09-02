@@ -42,9 +42,14 @@ class HourController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input());
-        // nameの属性値をkeyとして通常配列で送られる。
-        //
+        $dateInput = $request->input('date');
+        $hoursInputs = $request->input('hours');
+            // nameの属性値をkeyとして通常配列で送られる。
+            // 更に階層を深くすることができる
+
+        foreach ($hoursInputs as $hoursInput ) {
+            Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
+        }
 
         return redirect()->route('hours.create')->with('success', '時間を登録しました。');
     }

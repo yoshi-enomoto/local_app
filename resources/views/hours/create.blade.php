@@ -34,13 +34,15 @@
                 </div>
             </div>
             <div class="box-body">
-                @for($i=0; $i<10; $i++)
+                @for($i=0; $i<1; $i++)
+                {{-- @for($i=0; $i<10; $i++) --}}
                     <div class="form-group">
                         <label class="col-md-3 control-label">
                             カテゴリー/タスク/時間{{ $i+1 }}
                         </label>
                         <div class="col-md-3">
-                            <select class="form-control parent" name="category_id[]">
+                            <select class="form-control parent" name="hours[{{ $i }}][category_id]">
+                            {{-- <select class="form-control parent-{{ $i }}" name="hours[{{ $i }}][category_id]"> --}}
                                 <option value="" selected>カテゴリーを選択</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -48,7 +50,8 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select class="form-control children" name="task_id[]" disabled>
+                            <select class="form-control children" name="hours[{{ $i }}][task_id]" disabled>
+                            {{-- <select class="form-control children-{{ $i }}" name="hours[{{ $i }}][task_id]" disabled> --}}
                                 <option value="" selected>タスクを選択</option>
                                 @foreach($tasks as $task)
                                     <option value="{{ $task->id }}" data-val="{{ $task->category->id }}">{{ $task->name }}</option>
@@ -56,7 +59,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="hour[]" value="">
+                            <input class="form-control" type="text" name="hours[{{ $i }}][hour]" value="">
                         </div>
                     </div>
                 @endfor
@@ -98,5 +101,39 @@
                 $children.removeAttr('disabled');
             }
         });
+
+//         未完成の複数input
+//         for(var i = 0; i < 10; i++) {
+// 　　eval("var children" + i);
+
+//             console.log('.children-'+i);
+//             console.log($('children'+i));
+//         // var $children = $('.children-(i)');  // カテゴリーの要素を変数に入れる
+//         eval("var children" + i) = $('.children-'+i);  // カテゴリーの要素を変数に入れる
+//         var original = $('children'+i).html(); //後のイベントで、不要なoption要素を削除するため、オリジナルをとっておく
+
+//         // カテゴリーのselect要素が変更になるとイベントが発生
+//         // $('.parent-(i)').change(function() {
+//         $('.parent-'+i).change(function() {
+//             // カテゴリーのvalueを取得して変数に入れる
+//             var val1 = $(this).val();
+//             // 削除された要素をもとに戻すため.html(original)を入れておく
+//             $('children'+i).html(original).find('option').each(function() {
+//                 var val2 = $(this).data('val'); // data-valの値を取得
+//                 // valueと異なるdata-valを持つ要素を削除
+//                 if (val1 != val2) {
+//                     $(this).not(':first-child').remove();
+//                 }
+//             });
+
+//             // カテゴリーのselect要素が未選択の場合、タスクをdisabledにする
+//             if ($(this).val() == "") {
+//                 $('children'+i).attr('disabled', 'disabled');
+//             } else {
+//                 $('children'+i).removeAttr('disabled');
+//             }
+//         });
+//         }
+
     </script>
 @endsection
