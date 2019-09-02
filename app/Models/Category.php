@@ -25,4 +25,9 @@ class Category extends Model
           // メソッドで繋げるとHasManyクラス、
           // プロパティで繋げるとCollectionクラスが取得できる。
     }
+
+    public function hours()
+    {
+        return $this->hasMany('App\Models\Hours');
+    }
 }

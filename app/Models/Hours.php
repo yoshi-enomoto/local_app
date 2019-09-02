@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Task extends Model
+class Hours extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
+      'date',
+      'hour',
       'category_id',
-      'name',
+      'task_id',
     ];
 
     protected $dates = [
@@ -23,9 +25,8 @@ class Task extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    // nullの場合も考えられるので、一旦コメアウト
-    public function hours()
+    public function task()
     {
-        // return $this->hasMany('App\Models\Hours');
+        return $this->belongsTo('App\Models\Task');
     }
 }
