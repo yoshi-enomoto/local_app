@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Task;
 use App\Models\Hour;
-use App\Http\Requests\Task\StoreTaskRequest;
-use App\Http\Requests\Task\UpdateTaskRequest;
+use App\Http\Requests\Hour\StoreHourRequest;
+use App\Http\Requests\Hour\UpdateHourRequest;
 
 class HourController extends Controller
 {
@@ -40,7 +40,7 @@ class HourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreHourRequest $request)
     {
         $dateInput = $request->input('date');
         $hoursInputs = $request->input('hours');

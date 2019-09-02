@@ -23,20 +23,23 @@
             {{ csrf_field() }}
             <div class="box-header with-border">
                 <h3 class="box-title"></h3>
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                     <label class="col-md-3 control-label">
                         日付
                     </label>
                     <div class="col-md-9">
-                        <input class="form-control" type="date" name="date" value="{{ old('date') }}">
+                        <input class="form-control" type="date" name="date" value="{{ old('date') }}" min="2000-01-01" max="2999-12-31">
                         {{-- <input class="form-control" type="text" name="date" value="" id="datepicker"> --}}
+                        @if ($errors->has('date'))
+                            <span class="help-block"><strong>{{ $errors->first('date') }}</strong></span>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="box-body">
                 @for($i=0; $i<1; $i++)
                 {{-- @for($i=0; $i<10; $i++) --}}
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('hours.'.$i.'.category_id') || $errors->has('hours.'.$i.'.task_id') || $errors->has('hours.'.$i.'.hour') ? 'has-error' : '' }}">
                         <label class="col-md-3 control-label">
                             カテゴリー/タスク/時間{{ $i+1 }}
                         </label>
@@ -48,6 +51,9 @@
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('hours.'.$i.'.category_id'))
+                                <span class="help-block"><strong>{{ $errors->first('hours.'.$i.'.category_id') }}</strong></span>
+                            @endif
                         </div>
                         <div class="col-md-3">
                             <select class="form-control children" name="hours[{{ $i }}][task_id]" disabled>
@@ -57,10 +63,15 @@
                                     <option value="{{ $task->id }}" data-val="{{ $task->category->id }}">{{ $task->name }}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('hours.'.$i.'.task_id'))
+                                <span class="help-block"><strong>{{ $errors->first('hours.'.$i.'.task_id') }}</strong></span>
+                            @endif
                         </div>
                         <div class="col-md-3">
-                            <input class="form-control" type="text" name="hours[{{ $i }}][hour]" value="">
-                        </div>
+                            <input class="form-control" type="number" name="hours[{{ $i }}][hour]" value="" min="0" max="24" step="0.01">
+                            @if ($errors->has('hours.'.$i.'.hour'))
+                                <span class="help-block"><strong>{{ $errors->first('hours.'.$i.'.hour') }}</strong></span>
+                            @endif                        </div>
                     </div>
                 @endfor
                 <div class="form-group">
