@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\Hour;
 use App\Http\Requests\Hour\StoreHourRequest;
 use App\Http\Requests\Hour\UpdateHourRequest;
+use Carbon\Carbon;
 
 class HourController extends Controller
 {
@@ -18,7 +19,17 @@ class HourController extends Controller
      */
     public function index()
     {
-        //
+        $hours = Hour::all();
+
+        return view('hours.index', compact('hours'));
+    }
+
+    public function indexThisMonth()
+    {
+        $thisMonth = Carbon::now()->month;
+        $hours = Hour::whereMonth('date', '=', $thisMonth)->get();
+
+        return view('hours.index_this_month', compact('hours'));
     }
 
     /**

@@ -21,6 +21,7 @@ Route::resource('/categories', 'CategoryController');
 // resourceで生成していると、nameメソッドなくても付与されている？
 Route::resource('/tasks', 'TaskController', ['except' => 'show']);
 
+Route::get('/hours/index_this_month', 'HourController@indexThisMonth')->name('hours.index_this_month');
 Route::resource('/hours', 'HourController');
 
 // ————————————————————
