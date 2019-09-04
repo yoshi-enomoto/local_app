@@ -42,6 +42,21 @@ class HourController extends Controller
      */
     public function store(StoreHourRequest $request)
     {
+        if($request->input('register') == '連続登録する') {
+            $this->storeProcess($request);
+
+            return redirect()->route('hours.create')->with('success', '時間を登録しました。');
+        } else {
+            $this->storeProcess($request);
+
+            return redirect()->route('hours.index')->with('success', '時間を登録しました。');
+        }
+    }
+
+    public function storeProcess($request)
+    {
+        unset($request['register']);
+            // レコードinsertの為に削除しなくても保存できる
         $dateInput = $request->input('date');
         $hoursInputs = $request->input('hours');
             // nameの属性値をkeyとして通常配列で送られる。
@@ -50,8 +65,6 @@ class HourController extends Controller
         foreach ($hoursInputs as $hoursInput ) {
             Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
         }
-
-        return redirect()->route('hours.create')->with('success', '時間を登録しました。');
     }
 
     /**
