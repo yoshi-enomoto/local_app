@@ -10,13 +10,10 @@
                     <option value="" >カテゴリーを選択</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}"
-                            @if(isset($category_id)) {{ $category->id == $category_id ? 'selected' : '' }} @endif
+                            @if(isset($category_id)) {{ $category->id == $category_id ? 'selected' : '' }}
+                            @else {{ old('category_id') == $category->id ? 'selected' : '' }}
+                            @endif
                         >{{ $category->name }}</option>
-
-{{--                         <option value="{{ $category->id }}"
-                            @if(isset($task)) {{ $category->id == $task->category_id ? 'selected' : '' }} @endif
-                            @elseif(isset($category_id)) {{ $category->id == $category_id ? 'selected' : '' }} @endif
-                        >{{ $category->name }}</option> --}}
 
                     @endforeach
                 </select>
