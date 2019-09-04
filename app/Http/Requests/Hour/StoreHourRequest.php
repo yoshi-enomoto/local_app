@@ -27,7 +27,9 @@ class StoreHourRequest extends FormRequest
             'date' => 'required|date',
             'hours.*.category_id'  => 'required|integer',
             'hours.*.task_id'  => 'nullable|integer',
-            'hours.*.hour'  => 'required|between:0,24',
+            'hours.*.hour'  => 'required|numeric|between:0.00,24.00',
+            // 'hours.*.hour'=> ['required','numeric','regex:/^(?:d{0,2}.d{1,2}|d{1,2})$/','min:0','max:24']
+                // 正規表現を用いても、sv側で小数点制御が出来ない。（フロントで制御）
         ];
     }
 
