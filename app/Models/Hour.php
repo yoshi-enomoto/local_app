@@ -17,7 +17,13 @@ class Hour extends Model
     ];
 
     protected $dates = [
+      // 'date',
       'deleted_at',
+    ];
+
+    protected $casts = [
+        // 'フィールド名' => 'キャストしたい型',
+        'date' => 'date',
     ];
 
     public function category()
