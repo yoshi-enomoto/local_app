@@ -26,6 +26,8 @@ class HourController extends Controller
 
     public function indexThisMonth()
     {
+        $test = Hour::find(13);
+        // dd(var_dump($test));
         $thisMonth = Carbon::now()->month;
         $hours = Hour::whereMonth('date', '=', $thisMonth)->get();
 
@@ -53,6 +55,7 @@ class HourController extends Controller
      */
     public function store(StoreHourRequest $request)
     {
+        // dd(var_dump($request->input()));
         if($request->input('register') == '連続登録する') {
             $this->storeProcess($request);
 
@@ -115,11 +118,13 @@ class HourController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Models\Hour  $hour
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Hour $hour)
     {
-        //
+        $hour->delete();
+
+        return redirect()->route('hours.index_this_month')->with('success', '入力時間を削除しました。');
     }
 }

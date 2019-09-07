@@ -97,79 +97,29 @@
                             <th style="width: 60%;">時間数</th>
                             <th style="width: 30%;"></th>
                         </tr>
-                        @foreach($hours as $hour)
-
-                            <tr>
-                                <td style="vertical-align: middle;">{{ $hour->date->format('Y/m/d') }}（木）</td>
-                                <td style="vertical-align: middle;">{{ $hour->hour }}h</td>
-                                <td>
-                                    <a href="{{ route('hours.show', $hour) }}" class="btn btn-sm btn-success">詳細</a>
-                                    <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $hour->id }}">削除</a>
-                                </td>
-                            </tr>
-                        @endforeach
-
-                        <tr>
-                            <td style="vertical-align: middle;">8/1（木）</td>
-                            <td style="vertical-align: middle;">10.0h</td>
-                            <td>
-                                <a href="{{ route('mock_hours', ['show_this_month']) }}" class="btn btn-sm btn-success">詳細</a>
-                                <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
-                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="vertical-align: middle;">8/2（金）</td>
-                            <td style="vertical-align: middle;">9.8h</td>
-                            <td>
-                                <a href="" class="btn btn-sm btn-success">詳細</a>
-                                <a href="" class="btn btn-sm btn-primary">編集</a>
-                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                            </td>
-                        </tr>
-                        @for($i=0; $i<5; $i++)
-                            <tr>
-                                <td style="vertical-align: middle;">8/{{ 5 + $i }}（月）</td>
-                                <td style="vertical-align: middle;">{{ rand(80, 100) / 10 }}h</td>
-                                <td>
-                                    <a href="" class="btn btn-sm btn-success">詳細</a>
-                                    <a href="" class="btn btn-sm btn-primary">編集</a>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
-                                </td>
-                            </tr>
-                        @endfor
-                      </tbody>
+                            @foreach($hours as $hour)
+                                <tr>
+                                    <td style="vertical-align: middle;">{{ $hour->date->format('m/d') }}（{{ config('const.week')[$hour->date->format('w')] }}）</td>
+                                    <td style="vertical-align: middle;">{{ $hour->hour }}h</td>
+                                    {{-- <td style="vertical-align: middle;">{{ number_format($hour->hour, 2) }}h</td> --}}
+                                    <td>
+                                        <a href="{{ route('hours.show', $hour) }}" class="btn btn-sm btn-success">詳細</a>
+                                        <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a>
+                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $hour->id }}">削除</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
     </form>
-
     {{-- 削除モーダル --}}
-    @foreach($hours as $hour)
-        <div class="modal fade" id="deleteModal_{{ $hour->id }}">
-            <div class="modal-dialog">
-                {{-- <form action="#" method="POST" accept-charset="utf-8"> --}}
-                <form>
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                            <h4 class="modal-title">???削除</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>{{ $hour->date }}の入力時間を一覧から削除します。本当によろしいですか？</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">キャンセル</button>
-                            <button type="submit" class="btn btn-sm btn-danger" data-dissmiss="modal">削除する</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endforeach
+    @include('_components.modal_delete', [
+        'array' => $hours,
+        'classify' => 'hours.',
+        'action' => 'destroy',
+        'title' => '入力時間の削除',
+        'body' => '選択したデータを当月一覧から削除します。本当によろしいですか？',
+    ])
 @endsection
