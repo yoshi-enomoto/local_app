@@ -31,17 +31,17 @@
                             <th style="width: 60%;">総時間数</th>
                             <th style="width: 30%;"></th>
                         </tr>
-                        @for($i=1; $i<8; $i++)
+                        @foreach($hours as $hour)
                             <tr>
-                                <td style="vertical-align: middle;">{{ $i }}月</td>
-                                <td style="vertical-align: middle;">{{ rand(1700, 2000) / 10 }}h</td>
+                                <td style="vertical-align: middle;">{{ $hour->everyMonth }}月</td>
+                                <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
                                 <td>
                                     <a href="{{ route('mock_hours', ['show_month']) }}" class="btn btn-sm btn-success">詳細</a>
                                     <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
                                     <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
                                 </td>
                             </tr>
-                        @endfor
+                        @endforeach
                       </tbody>
                 </table>
             </div>

@@ -20,7 +20,8 @@ class HourController extends Controller
      */
     public function index()
     {
-        $hours = Hour::all();
+        $hours = DB::table('hours')->select(DB::raw('SUM(hour) as sum_hour'), DB::raw('DATE_FORMAT(date, "%Y/%m") as everyMonth'))->groupby(DB::raw('DATE_FORMAT(date, "%Y/%m")'))->get();
+
 
         return view('hours.index', compact('hours'));
     }

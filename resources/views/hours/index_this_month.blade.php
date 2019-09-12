@@ -102,7 +102,6 @@
                                     <td>
                                         <a href="{{ route('hours.show', $hour) }}" class="btn btn-sm btn-success">詳細</a>
                                         <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a>
-                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $hour->id }}">削除</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -111,12 +110,4 @@
             </div>
         </div>
     </form>
-    {{-- 削除モーダル --}}
-{{--     @include('_components.modal_delete', [
-        'array' => $thisMonthHours,
-        'classify' => 'thisMonthHours.',
-        'action' => 'destroy',
-        'title' => '入力時間の削除',
-        'body' => '選択したデータを当月一覧から削除します。本当によろしいですか？',
-    ]) --}}
 @endsection
