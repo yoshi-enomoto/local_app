@@ -100,7 +100,7 @@
                             @foreach($hours as $hour)
                                 <tr>
                                     <td style="vertical-align: middle;">{{ $hour->date->format('m/d') }}（{{ config('const.week')[$hour->date->format('w')] }}）</td>
-                                    <td style="vertical-align: middle;">{{ $hour->hour }}h</td>
+                                    <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
                                     {{-- <td style="vertical-align: middle;">{{ number_format($hour->hour, 2) }}h</td> --}}
                                     <td>
                                         <a href="{{ route('hours.show', $hour) }}" class="btn btn-sm btn-success">詳細</a>

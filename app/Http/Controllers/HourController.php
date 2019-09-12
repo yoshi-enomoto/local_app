@@ -9,6 +9,7 @@ use App\Models\Hour;
 use App\Http\Requests\Hour\StoreHourRequest;
 use App\Http\Requests\Hour\UpdateHourRequest;
 use Carbon\Carbon;
+use DB;
 
 class HourController extends Controller
 {
@@ -26,10 +27,8 @@ class HourController extends Controller
 
     public function indexThisMonth()
     {
-        $test = Hour::find(13);
-        // dd(var_dump($test));
         $thisMonth = Carbon::now()->month;
-        $hours = Hour::whereMonth('date', '=', $thisMonth)->get();
+        $hours = Hour::whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->get();
 
         return view('hours.index_this_month', compact('hours'));
     }
