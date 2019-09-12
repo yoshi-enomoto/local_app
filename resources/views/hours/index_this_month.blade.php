@@ -29,26 +29,23 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">総時間数</label>
                             <div class="col-md-9">
-                                <p class="form-control-static">190h</p>
+                                <p class="form-control-static">{{ $thisMonthCategoryHourSum }}h</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @php
-                $array = ['新規案件1', '既存案件9', 'その他雑務', '新規案件2', '新規案件3']
-            @endphp
-            @foreach($array as $var)
+            @foreach ($thisMonthCategoryHours as $hour)
                 <div class="col-md-6">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">{{ $var }}</h3>
+                            <h3 class="box-title">{{ $hour->category->name }}</h3>
                         </div>
                         <div class="box-body">
                             <div class="form-group">
                                 <label class="col-md-3 control-label">総時間数</label>
                                 <div class="col-md-9">
-                                    <p class="form-control-static">38h</p>
+                                    <p class="form-control-static">{{ $hour->sum_hour }}h</p>
                                 </div>
                             </div>
                         </div>
@@ -62,11 +59,11 @@
                 <h3 class="box-title">カテゴリー/総時間数当月一覧</h3>
             </div>
             <div class="box-body">
-                @foreach ($array as $var)
+                @foreach ($thisMonthCategoryHours as $hour)
                     <div class="form-group">
-                        <label class="col-md-3 control-label">{{ $var }}</label>
+                        <label class="col-md-3 control-label">{{ $hour->category->name }}</label>
                         <div class="col-md-9">
-                            <p class="form-control-static">{{ rand(30, 40) }}h</p>
+                            <p class="form-control-static">{{ $hour->sum_hour }}h</p>
                         </div>
                     </div>
                 @endforeach
@@ -75,7 +72,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">トータル時間数</label>
                     <div class="col-md-9">
-                        <p class="form-control-static">190h</p>
+                        <p class="form-control-static">{{ $thisMonthCategoryHourSum }}h</p>
                     </div>
                 </div>
             </div>
@@ -97,7 +94,7 @@
                             <th style="width: 60%;">時間数</th>
                             <th style="width: 30%;"></th>
                         </tr>
-                            @foreach($hours as $hour)
+                            @foreach($thisMonthHours as $hour)
                                 <tr>
                                     <td style="vertical-align: middle;">{{ $hour->date->format('m/d') }}（{{ config('const.week')[$hour->date->format('w')] }}）</td>
                                     <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
@@ -115,11 +112,11 @@
         </div>
     </form>
     {{-- 削除モーダル --}}
-    @include('_components.modal_delete', [
-        'array' => $hours,
-        'classify' => 'hours.',
+{{--     @include('_components.modal_delete', [
+        'array' => $thisMonthHours,
+        'classify' => 'thisMonthHours.',
         'action' => 'destroy',
         'title' => '入力時間の削除',
         'body' => '選択したデータを当月一覧から削除します。本当によろしいですか？',
-    ])
+    ]) --}}
 @endsection

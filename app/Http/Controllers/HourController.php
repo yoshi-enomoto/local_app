@@ -28,9 +28,14 @@ class HourController extends Controller
     public function indexThisMonth()
     {
         $thisMonth = Carbon::now()->month;
-        $hours = Hour::whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->get();
 
-        return view('hours.index_this_month', compact('hours'));
+        $thisMonthCategoryHours = Hour::whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
+
+        $thisMonthCategoryHourSum = Hour::whereMonth('date', '=', $thisMonth)->sum('hour');
+
+        $thisMonthHours = Hour::whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->get();
+
+        return view('hours.index_this_month', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
     }
 
     /**
