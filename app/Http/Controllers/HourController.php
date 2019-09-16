@@ -29,11 +29,8 @@ class HourController extends Controller
     public function indexThisMonth()
     {
         $thisMonth = Carbon::now()->month;
-
         $thisMonthCategoryHours = Hour::whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
-
         $thisMonthCategoryHourSum = Hour::whereMonth('date', '=', $thisMonth)->sum('hour');
-
         $thisMonthHours = Hour::whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->get();
 
         return view('hours.index_this_month', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
@@ -89,12 +86,15 @@ class HourController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  date  $$date
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($date)
+        // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
-        //
+        $targetHours = Hour::where('date', $date)->get();
+
+        return view('hours.show', compact('date', 'targetHours'));
     }
 
     /**
@@ -121,14 +121,16 @@ class HourController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified date from storage.
      *
-     * @param  App\Models\Hour  $hour
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hour $hour)
+    public function destroy(Request $request)
     {
-        $hour->delete();
+        $targetDate = $request->input('date_target');
+        $targetIds = Hour::where('date', $targetDate)->pluck('id')->all();
+        Hour::destroy($array);
 
         return redirect()->route('hours.index_this_month')->with('success', '入力時間を削除しました。');
     }

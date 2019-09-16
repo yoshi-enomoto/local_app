@@ -22,7 +22,8 @@ Route::resource('/categories', 'CategoryController');
 Route::resource('/tasks', 'TaskController', ['except' => 'show']);
 
 Route::get('/hours/index_this_month', 'HourController@indexThisMonth')->name('hours.index_this_month');
-Route::resource('/hours', 'HourController');
+Route::post('/hours/destory', 'HourController@destroy')->name('hours.destroy');
+Route::resource('/hours', 'HourController', ['except' => 'destroy']);
 
 // ————————————————————
 

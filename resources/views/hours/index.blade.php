@@ -37,7 +37,7 @@
                                 <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
                                 <td>
                                     <a href="{{ route('mock_hours', ['show_month']) }}" class="btn btn-sm btn-success">詳細</a>
-                                    <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
+{{--                                     <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a> --}}
                                     <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_number">削除</a>
                                 </td>
                             </tr>
@@ -49,7 +49,7 @@
     </form>
 
     {{-- 削除モーダル --}}
-    <div class="modal fade" id="deleteModal_number">
+    <div class="modal fade" id="deleteModal_number" data-keyboard="true" tabindex="-1">
         <div class="modal-dialog">
             {{-- <form action="#" method="POST" accept-charset="utf-8"> --}}
             <form>
