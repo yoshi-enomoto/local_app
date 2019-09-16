@@ -144,6 +144,7 @@ class HourController extends Controller
         return view('hours.show_date', compact('date', 'targetHours', 'sum_hour'));
     }
 
+    // wip
     public function showMonth($date)
         // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
@@ -167,6 +168,7 @@ class HourController extends Controller
         return redirect()->route('hours.list_date')->with('success', '入力時間を削除しました。');
     }
 
+    // wip
     public function destroyMonth(Request $request)
     {
         $targetDate = explode("/", $request->input('target'));
