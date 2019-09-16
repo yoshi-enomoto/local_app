@@ -34,7 +34,6 @@ class HourController extends Controller
      */
     public function store(StoreHourRequest $request)
     {
-        // dd(var_dump($request->input()));
         if($request->input('register') == '連続登録する') {
             $this->storeProcess($request);
 
@@ -106,9 +105,11 @@ class HourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function listDate()
+        // 当月
     {
         $thisYear = Carbon::now()->year;
         $thisMonth = Carbon::now()->month;
+
         $thisMonthCategoryHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
         $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->sum('hour');
         $thisMonthHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
@@ -120,8 +121,25 @@ class HourController extends Controller
     {
         $hours = DB::table('hours')->select(DB::raw('SUM(hour) as sum_hour'), DB::raw('DATE_FORMAT(date, "%Y/%m") as everyMonth'))->groupby(DB::raw('DATE_FORMAT(date, "%Y/%m")'))->get();
 
-
         return view('hours.list_month', compact('hours'));
+    }
+
+    public function listSelectMonth($year, $month)
+        // アクセスされた月
+    {
+        $thisMonthCategoryHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
+        $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->sum('hour');
+        $thisMonthHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
+
+        return view('hours.list_date', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
+
+    }
+
+    public function listProcess($thisYear, $thisMonth)
+    {
+        $thisMonthCategoryHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
+        $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->sum('hour');
+        $thisMonthHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
     }
 
     /**

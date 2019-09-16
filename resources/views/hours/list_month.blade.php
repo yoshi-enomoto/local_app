@@ -36,8 +36,7 @@
                                 <td style="vertical-align: middle;">{{ $hour->everyMonth }}月</td>
                                 <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
                                 <td>
-                                    {{-- wip --}}
-                                    <a href="{{ route('mock_hours', ['show_month']) }}" class="btn btn-sm btn-success">詳細</a>
+                                    <a href="{{ route('hours.list_select_month', [explode("/", $hour->everyMonth)[0], explode("/", $hour->everyMonth)[1]]) }}" class="btn btn-sm btn-success">詳細</a>
 {{--                                     <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a> --}}
                                     <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $key }}">削除</a>
                                 </td>
