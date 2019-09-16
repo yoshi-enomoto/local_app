@@ -54,6 +54,7 @@
         <div class="modal fade" id="deleteModal_{{ $key }}" data-keyboard="true" tabindex="-1">
             <div class="modal-dialog">
                 {{-- wip --}}
+
                 <form action="{{ route('hours.destroy_month') }}" method="POST" accept-charset="utf-8">
                     {{ csrf_field() }}
                     {{-- {{ method_field('DELETE') }} --}}
