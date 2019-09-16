@@ -21,6 +21,10 @@ Route::resource('/categories', 'CategoryController');
 // resourceで生成していると、nameメソッドなくても付与されている？
 Route::resource('/tasks', 'TaskController', ['except' => 'show']);
 
-Route::get('/hours/index_this_month', 'HourController@indexThisMonth')->name('hours.index_this_month');
-Route::post('/hours/destory', 'HourController@destroy')->name('hours.destroy');
-Route::resource('/hours', 'HourController', ['except' => 'destroy']);
+Route::get('/hours/list_month', 'HourController@listMonth')->name('hours.list_month');
+Route::get('/hours/list_date', 'HourController@listDate')->name('hours.list_date');
+Route::get('/hours/list_month/{month}', 'HourController@showMonth')->name('hours.show_month');
+Route::get('/hours/list_date/{date}', 'HourController@showDate')->name('hours.show_date');
+Route::post('/hours/destory_date', 'HourController@destroyDate')->name('hours.destroy_date');
+Route::post('/hours/destory_month', 'HourController@destroyMonth')->name('hours.destroy_month');
+Route::resource('/hours', 'HourController', ['except' => ['index', 'show', 'destroy']]);

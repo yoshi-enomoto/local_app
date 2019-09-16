@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                <a href="{{ route('mock_hours', ['index_this_month']) }}" class="btn btn-sm btn-default">当月一覧へ戻る</a>
+                <a href="{{ route('hours.list_date') }}" class="btn btn-sm btn-default">当月一覧へ戻る</a>
             </div>
         </form>
     </div>
