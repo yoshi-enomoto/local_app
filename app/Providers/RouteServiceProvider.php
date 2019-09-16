@@ -39,7 +39,23 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapMockRoutes();
+
+
+        // $appMode = Config::get('app.mode', 'user');
+
+        // switch ($appMode) {
+        //     case 'admin':
+        //         $this->mapAdminRoute();
+        //         break;
+        //     case 'dev':
+        //         $this->mapAdminRoute();
+        //         $this->mapMockRoute();
+        //         break;
+        //     default:
+        //         $this->mapWebRoutes();
+        //         break;
+        // }
     }
 
     /**
@@ -54,6 +70,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapMockRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/mock.php'));
     }
 
     /**
