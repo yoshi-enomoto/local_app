@@ -66,9 +66,12 @@ class HourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Hour $hour)
     {
-        //
+        $categories = Category::all();
+        $tasks = Task::all();
+
+        return view('hours.edit', compact('hour', 'categories', 'tasks'));
     }
 
     /**
@@ -78,9 +81,16 @@ class HourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateHourRequest $request, Hour $hour)
     {
-        //
+        $dateInput = $request->input('date');
+        $hoursInputs = $request->input('hours');
+
+        foreach ($hoursInputs as $hoursInput ) {
+            $hour->update(array_merge($hoursInput, ['date' => $dateInput]));
+        }
+
+        return redirect()->route('hours.show_date', $hour->date->format('Y-m-d'))->with('success', '時間を更新しました。');
     }
 
     /**
