@@ -93,8 +93,14 @@ class HourController extends Controller
         // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
         $targetHours = Hour::where('date', $date)->get();
+        // $test = Hour::select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->havingRaw('date = '.$date);
+        $sum_hour = DB::table('hours')
+                ->select('date', DB::raw('SUM(hour) as sum_hour'))
+                ->groupBy('date')
+                ->havingRaw('date = ?', [$date])
+                ->get()[0]->sum_hour;
 
-        return view('hours.show', compact('date', 'targetHours'));
+        return view('hours.show', compact('date', 'targetHours', 'sum_hour'));
     }
 
     /**

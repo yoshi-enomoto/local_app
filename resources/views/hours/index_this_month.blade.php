@@ -10,7 +10,7 @@
     <h1>@yield('title_prefix')</h1>
     <!-- パンくずリスト -->
     <ol class="breadcrumb">
-        <li><a href="{{ route('mock', ['home']) }}">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li>@yield('title_prefix')</li>
     </ol>
 @endsection
