@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -37,25 +38,20 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        $appMode = Config::get('app.mode', 'dev');
 
-        $this->mapMockRoutes();
-
-
-        // $appMode = Config::get('app.mode', 'user');
-
-        // switch ($appMode) {
-        //     case 'admin':
-        //         $this->mapAdminRoute();
-        //         break;
-        //     case 'dev':
-        //         $this->mapAdminRoute();
-        //         $this->mapMockRoute();
-        //         break;
-        //     default:
-        //         $this->mapWebRoutes();
-        //         break;
-        // }
+        switch ($appMode) {
+            case 'drive':
+                $this->mapWebRoutes();
+                break;
+            case 'dev':
+                $this->mapMockRoutes();
+                $this->mapWebRoutes();
+                break;
+            default:
+                $this->mapWebRoutes();
+                break;
+        }
     }
 
     /**

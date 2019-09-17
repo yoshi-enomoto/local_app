@@ -24,10 +24,11 @@
                 <li><a href="{{ route('hours.list_date') }}"><i class="fa fa-circle-o"></i>当月一覧</a></li>
                 <li><a href="{{ route('hours.list_month') }}"><i class="fa fa-circle-o"></i>月一覧</a></li>
 
-
-                <li><a href="{{ route('mock_hours', ['create']) }}"><i class="fa fa-circle-o"></i>時間入力</a></li>
-                <li><a href="{{ route('mock_hours', ['index_this_month']) }}"><i class="fa fa-circle-o"></i>当月一覧</a></li>
-                <li><a href="{{ route('mock_hours', ['index_month']) }}"><i class="fa fa-circle-o"></i>月一覧</a></li>
+                @if(Config::get('app.mode') == 'dev')
+                    <li><a href="{{ route('mock_hours', ['create']) }}"><i class="fa fa-circle-o"></i>時間入力</a></li>
+                    <li><a href="{{ route('mock_hours', ['index_this_month']) }}"><i class="fa fa-circle-o"></i>当月一覧</a></li>
+                    <li><a href="{{ route('mock_hours', ['index_month']) }}"><i class="fa fa-circle-o"></i>月一覧</a></li>
+                @endif
             </ul>
         </li>
     </ul>
