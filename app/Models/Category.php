@@ -30,4 +30,14 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Hour');
     }
+
+    public static function boot()
+    {
+        // laravel-cascade-soft-deletesパッケージをcomposer経由で使う手もある。
+        parent::boot();
+        static::deleting(function ($category) {
+            $category->tasks()->delete();
+            $category->hours()->delete();
+        });
+    }
 }
