@@ -23,7 +23,7 @@
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">当月トータル時間数</h3>
+                        <h3 class="box-title">当月総時間数</h3>
                     </div>
                     <div class="box-body">
                         <div class="form-group">
@@ -37,7 +37,7 @@
             </div>
             @foreach ($thisMonthCategoryHours as $hour)
                 <div class="col-md-6">
-                    <div class="box box-info">
+                    <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title">{{ $hour->category->name }}</h3>
                         </div>
@@ -48,6 +48,12 @@
                                     <p class="form-control-static">{{ $hour->sum_hour }}h</p>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">割合</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static">{{ round($hour->sum_hour / $thisMonthCategoryHourSum * 100, 2) }}%</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +62,7 @@
         <!-- コンテンツ1-b -->
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">カテゴリー/総時間数当月一覧</h3>
+                <h3 class="box-title">カテゴリー別総時間数：割合</h3>
             </div>
             <div class="box-body">
                 @foreach ($thisMonthCategoryHours as $hour)
@@ -64,13 +70,14 @@
                         <label class="col-md-3 control-label">{{ $hour->category->name }}</label>
                         <div class="col-md-9">
                             <p class="form-control-static">{{ $hour->sum_hour }}h</p>
+                            <p class="form-control-static">： {{ round($hour->sum_hour / $thisMonthCategoryHourSum * 100, 2) }}%</p>
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="box-footer">
                 <div class="form-group">
-                    <label class="col-md-3 control-label">トータル時間数</label>
+                    <label class="col-md-3 control-label">当月総時間数</label>
                     <div class="col-md-9">
                         <p class="form-control-static">{{ $thisMonthCategoryHourSum }}h</p>
                     </div>
