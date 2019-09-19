@@ -34,7 +34,7 @@
             @endif
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 30px;">
         <div class="col-md-offset-3 col-md-9">
             <button type="submit" class="btn btn-sm btn-primary">{{ $button }}</button>
         </div>
@@ -44,13 +44,13 @@
         <label class="col-md-3 control-label" for="color">
             イメージカラー例
         </label>
-        @foreach($colorList1 as $color)
+        @foreach(config('const.colorList1') as $color)
             <div class="col-md-2">
                 <button type="button" class="btn btn-default btn-block" style="background-color:{{ $color }}; color: #000000;">{{ $color }}</button>
             </div>
         @endforeach
     </div>
-    @foreach($colorList2 as $key => $color)
+    @foreach(config('const.colorList2') as $key => $color)
         @if($key == 0 || $key == 4)
             <div class="form-group">
         @endif
