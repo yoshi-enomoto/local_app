@@ -29,7 +29,7 @@ class HourController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Hour\StoreHourRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreHourRequest $request)
@@ -41,11 +41,16 @@ class HourController extends Controller
         } else {
             $this->storeProcess($request);
 
-            return redirect()->route('hours.index')->with('success', '時間を登録しました。');
+            return redirect()->route('hours.list_date')->with('success', '時間を登録しました。');
         }
     }
 
-    public function storeProcess($request)
+    /**
+     * 保存処理の本体
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    public function storeProcess(Request $request)
     {
         unset($request['register']);
             // レコードinsertの為に削除しなくても保存できる
@@ -62,7 +67,7 @@ class HourController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Hour  $hour
      * @return \Illuminate\Http\Response
      */
     public function edit(Hour $hour)
@@ -76,8 +81,8 @@ class HourController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Hour\UpdateHourRequest  $request
+     * @param  \App\Models\Hour  $hour
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateHourRequest $request, Hour $hour)
@@ -91,13 +96,6 @@ class HourController extends Controller
 
         return redirect()->route('hours.show_date', $hour->date->format('Y-m-d'))->with('success', '時間を更新しました。');
     }
-
-    /**
-     * Remove the specified date from storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     /**
      * Display a listing of the resource.
@@ -117,6 +115,10 @@ class HourController extends Controller
         return view('hours.list_date', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
     }
 
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     */
     public function listMonth()
     {
         $hours = DB::table('hours')->select(DB::raw('SUM(hour) as sum_hour'), DB::raw('DATE_FORMAT(date, "%Y/%m") as everyMonth'))->groupby(DB::raw('DATE_FORMAT(date, "%Y/%m")'))->get();
@@ -124,7 +126,13 @@ class HourController extends Controller
         return view('hours.list_month', compact('hours'));
     }
 
-    public function listSelectMonth($year, $month)
+    /**
+     * Display a listing of the specified resource.
+     * @param  String $year
+     * @param  String $month
+     * @return \Illuminate\Http\Response
+     */
+    public function listSelectMonth(String $year, String $month)
         // アクセスされた月
     {
         $thisMonthCategoryHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
@@ -135,6 +143,7 @@ class HourController extends Controller
 
     }
 
+    // wip
     public function listProcess($thisYear, $thisMonth)
     {
         $thisMonthCategoryHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
@@ -145,10 +154,10 @@ class HourController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  date  $$date
+     * @param  String  $$date
      * @return \Illuminate\Http\Response
      */
-    public function showDate($date)
+    public function showDate(String $date)
         // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
         $targetHours = Hour::where('date', $date)->get();
@@ -162,7 +171,7 @@ class HourController extends Controller
         return view('hours.show_date', compact('date', 'targetHours', 'sum_hour'));
     }
 
-    // wip
+    // wip：不要？
     public function showMonth($date)
         // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
@@ -177,6 +186,12 @@ class HourController extends Controller
         return view('hours.show_month', compact('date', 'targetHours', 'sum_hour'));
     }
 
+    /**
+     * Remove the specified date from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function destroyDate(Request $request)
     {
         $targetDate = $request->input('date_target');
@@ -186,7 +201,7 @@ class HourController extends Controller
         return redirect()->route('hours.list_date')->with('success', '入力時間を削除しました。');
     }
 
-    // wip
+    // wip：機能確認！：削除はできるが、入れ物（日付）が残る。
     public function destroyMonth(Request $request)
     {
         $targetDate = explode("/", $request->input('target'));
