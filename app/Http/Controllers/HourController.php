@@ -140,7 +140,7 @@ class HourController extends Controller
         $thisMonthHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
 
         return view('hours.list_date', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
-
+            // 当月一覧で使用しているbladeに飛ぶ。
     }
 
     // wip

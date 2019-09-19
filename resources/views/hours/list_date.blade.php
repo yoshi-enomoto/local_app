@@ -36,8 +36,9 @@
                 </div>
             </div>
             @foreach ($thisMonthCategoryHours as $hour)
+            {{-- {{ dd($hour->category->color) }} --}}
                 <div class="col-md-6">
-                    <div class="box box-warning">
+                    <div class="box box-warning" style="border-top-color: {{ $hour->category->color }};">
                         <div class="box-header with-border">
                             <h3 class="box-title">{{ $hour->category->name }}</h3>
                         </div>

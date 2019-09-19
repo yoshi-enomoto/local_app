@@ -39,4 +39,26 @@
             <button type="submit" class="btn btn-sm btn-primary">{{ $button }}</button>
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="color">
+            イメージカラー例
+        </label>
+        @foreach($colorList1 as $color)
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-block" style="background-color:{{ $color }}; color: #000000;">{{ $color }}</button>
+            </div>
+        @endforeach
+    </div>
+    @foreach($colorList2 as $key => $color)
+        @if($key == 0 || $key == 4)
+            <div class="form-group">
+        @endif
+            <div class="col-md-2 {{ $key == 0 || $key == 4 ? 'col-md-offset-3' : '' }}">
+                <button type="button" class="btn btn-default btn-block" style="background-color:{{ $color }}; color: #000000;">{{ $color }}</button>
+            </div>
+        @if($key == 3 || $key == 7)
+            </div>
+        @endif
+    @endforeach
 </form>

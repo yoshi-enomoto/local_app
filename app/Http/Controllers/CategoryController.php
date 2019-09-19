@@ -28,7 +28,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        $colorList1 = ['#E60012', '#F39800', '#FFF100', '#8FC31F'];
+        $colorList2 = ['#009944', '#009E96', '#00A0E9', '#0068B7', '#1D2088', '#920783', '#E4007F', '#E5004F'];
+
+        return view('categories.create', compact('colorList1', 'colorList2'));
     }
 
     /**
