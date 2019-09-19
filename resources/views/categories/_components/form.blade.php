@@ -42,7 +42,8 @@
 
     <div class="form-group">
         <label class="col-md-3 control-label" for="color">
-            イメージカラー例
+            <a href="https://ironodata.info/directory/">イメージカラー例1</a><br>
+            {{-- <a href="https://www.colordic.org">イメージカラー例2</a> --}}
         </label>
         @foreach(config('const.colorList1') as $color)
             <div class="col-md-2">
