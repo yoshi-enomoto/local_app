@@ -77,3 +77,9 @@ Route::get('mock/{page?}', function ($page = null) {
         return view('mock.home');
     }
 })->name('mock');
+// ————————————————————
+
+// テストメール用の参考ビュー表示用
+Route::get('/hours/test_mail', function() {
+    return new App\Mail\TestSendMail();
+});

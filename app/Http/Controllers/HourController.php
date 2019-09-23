@@ -10,6 +10,9 @@ use App\Http\Requests\Hour\StoreHourRequest;
 use App\Http\Requests\Hour\UpdateHourRequest;
 use Carbon\Carbon;
 use DB;
+// メール送信用の処理（お試し・テスト）
+use Mail;
+use App\Mail\TestSendMail;
 
 class HourController extends Controller
 {
@@ -60,7 +63,17 @@ class HourController extends Controller
             // 更に階層を深くすることができる
 
         foreach ($hoursInputs as $hoursInput ) {
-            Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
+            // Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
+                // メール送信用の為に、一旦コメントアウト
+
+            // メール送信用の処理（お試し・テスト）
+            $hour = new Hour();
+            $hour = Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
+                // メールコントローラーに渡す為に、変数に格納。
+            $to = 'example@example.com';
+            $subject = '時間登録内容';
+            $body = $hour;
+            Mail::to($to)->send(new TestSendMail($subject, $body));
         }
     }
 
