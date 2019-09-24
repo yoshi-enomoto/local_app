@@ -29,4 +29,4 @@ Route::get('/hours/list_select_month/{year}/{month}', 'HourController@listSelect
 
 Route::post('/hours/destory_date', 'HourController@destroyDate')->name('hours.destroy_date');
 Route::post('/hours/destory_month', 'HourController@destroyMonth')->name('hours.destroy_month');
-Route::resource('/hours', 'HourController', ['except' => ['index', 'show', 'destroy']]);
+Route::resource('/hours', 'HourController', ['except' => ['index', 'show']]);

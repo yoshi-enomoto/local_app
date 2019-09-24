@@ -41,6 +41,7 @@
                         </div>
                         <div class="col-md-3">
                             <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a>
+                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $hour->id }}">削除</a>
                         </div>
                     </div>
                 @endforeach
@@ -56,4 +57,12 @@
             </div>
         </form>
     </div>
+    {{-- 削除モーダル --}}
+    @include('_components.modal_delete', [
+        'array' => $targetHours,
+        'classify' => 'hours.',
+        'action' => 'destroy',
+        'title' => '入力時間削除',
+        'body' => '選択した内容の入力時間を一覧から削除します。本当によろしいですか？',
+    ])
 @endsection

@@ -202,6 +202,19 @@ class HourController extends Controller
     /**
      * Remove the specified date from storage.
      *
+     * @param  \App\Models\Hour  $hour
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Hour $hour)
+    {
+        $hour->delete();
+
+        return redirect()->route('hours.show_date', $hour->date->format('Y-m-d'))->with('success', '入力時間を削除しました。');
+    }
+
+    /**
+     * Remove the specified date from storage.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
