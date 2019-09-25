@@ -1,7 +1,7 @@
 @extends('_layouts.default')
 
 @section('title_prefix')
-    当月一覧
+    月詳細：{{ $year.'年'.$month.'月' }}
 @endsection
 @section('title', '')
 
@@ -14,7 +14,7 @@
         <li>@yield('title_prefix')</li>
     </ol>
 @endsection
-{{-- {{ dd($hours) }} --}}
+
 <!-- メインコンテンツ -->
 @section('content-body')
     <form class="form-horizontal">
@@ -36,7 +36,6 @@
                 </div>
             </div>
             @foreach ($thisMonthCategoryHours as $hour)
-            {{-- {{ dd($hour->category->color) }} --}}
                 <div class="col-md-6">
                     <div class="box box-warning" style="border-top-color: {{ $hour->category->color }};">
                         <div class="box-header with-border">
@@ -88,13 +87,12 @@
         <!-- コンテンツ2 -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">当月一覧</h3>
+                <h3 class="box-title">日付一覧</h3>
                 <div class="box-tools">
                     <a href="{{ route('hours.create') }}" class="btn btn-sm btn-primary">時間入力</a>
                 </div>
             </div>
             <div class="box-body">
-                {{-- show_month.blade.phpでも同じものを使用 --}}
                 <table class="table table-bordered table-hover">
                     <tbody>
                         <tr>
@@ -108,7 +106,8 @@
                                     <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
                                     {{-- <td style="vertical-align: middle;">{{ number_format($hour->hour, 2) }}h</td> --}}
                                     <td>
-                                        <a href="{{ route('hours.show_date', $hour->date->format('Y-m-d')) }}" class="btn btn-sm btn-success">詳細</a>
+                                        {{-- <a href="{{ route('hours.show_date', $hour->date->format('Y-m-d')) }}" class="btn btn-sm btn-success">詳細</a> --}}
+                                        <a href="{{ route('hours.show_date', [$hour->date->format('Y-m'),  $hour->date->format('d')]) }}" class="btn btn-sm btn-success">詳細</a>
                                         {{-- <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a> --}}
                                         <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $key }}">削除</a>
                                     </td>

@@ -17,15 +17,16 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+// category
 Route::resource('/categories', 'CategoryController');
-// resourceで生成していると、nameメソッドなくても付与されている？
+    // resourceで生成していると、nameメソッドなくても付与されている？
+// task
 Route::resource('/tasks', 'TaskController', ['except' => 'show']);
-
-Route::get('/hours/list_month', 'HourController@listMonth')->name('hours.list_month');
-Route::get('/hours/list_date', 'HourController@listDate')->name('hours.list_date');
-Route::get('/hours/list_month/{month}', 'HourController@showMonth')->name('hours.show_month');
-Route::get('/hours/list_date/{date}', 'HourController@showDate')->name('hours.show_date');
-Route::get('/hours/list_select_month/{year}/{month}', 'HourController@listSelectMonth')->name('hours.list_select_month');
+// hour
+Route::get('/hours/list_months', 'HourController@listMonths')->name('hours.list_months');
+Route::get('/hours/list_months/{month}', 'HourController@listDates')->name('hours.list_dates');
+Route::get('/hours/list_this_month', 'HourController@listThisMonth')->name('hours.list_this_month');
+Route::get('/hours/list_months/{month}/{date}', 'HourController@showDate')->name('hours.show_date');
 
 Route::post('/hours/destory_date', 'HourController@destroyDate')->name('hours.destroy_date');
 Route::post('/hours/destory_month', 'HourController@destroyMonth')->name('hours.destroy_month');

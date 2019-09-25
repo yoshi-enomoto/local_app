@@ -3,7 +3,7 @@
 @section('title_prefix')
     詳細：
 @endsection
-@section('title', $date)
+@section('title', $month .'-' .$date)
 
 <!-- コンテンツヘッダ -->
 @section('content-header')
@@ -11,7 +11,7 @@
     <!-- パンくずリスト -->
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
-        <li><a href="{{ route('hours.list_date') }}">当月一覧</a></li>
+        <li><a href="{{ route('hours.list_this_month') }}">当月一覧</a></li>
         <li class="active">@yield('title_prefix')@yield('title')</li>
     </ol>
 @endsection
@@ -53,7 +53,8 @@
                         <p class="form-control-static">{{ $sum_hour }}h</p>
                     </div>
                 </div>
-                <a href="{{ route('hours.list_date') }}" class="btn btn-sm btn-default">当月一覧へ戻る</a>
+                {{-- <a href="{{ route('hours.list_this_month') }}" class="btn btn-sm btn-default">当月一覧へ戻る</a> --}}
+                <a href="javascript:history.back()" class="btn btn-sm btn-default">月詳細へ戻る</a>
             </div>
         </form>
     </div>

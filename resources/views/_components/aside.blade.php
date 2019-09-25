@@ -21,8 +21,8 @@
             <a href="#"><i class="fa fa-star"></i><span>時間数管理</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
                 <li class="{{ request()->is('hours/create') ? 'active' : '' }}"><a href="{{ route('hours.create') }}"><i class="fa fa-circle-o"></i>時間入力</a></li>
-                <li class="{{ request()->is('hours/list_date') ? 'active' : '' }}"><a href="{{ route('hours.list_date') }}"><i class="fa fa-circle-o"></i>当月一覧</a></li>
-                <li class="{{ request()->is('hours/list_month') ? 'active' : '' }}"><a href="{{ route('hours.list_month') }}"><i class="fa fa-circle-o"></i>月一覧</a></li>
+                <li class="{{ request()->is('hours/list_this_month') ? 'active' : '' }}"><a href="{{ route('hours.list_this_month') }}"><i class="fa fa-circle-o"></i>当月詳細</a></li>
+                <li class="{{ request()->is('hours/list_months') ? 'active' : '' }}"><a href="{{ route('hours.list_months') }}"><i class="fa fa-circle-o"></i>月一覧</a></li>
 
                 @if(Config::get('app.mode') == 'dev')
                     <li><a href="{{ route('mock_hours', ['create']) }}"><i class="fa fa-circle-o"></i>時間入力</a></li>

@@ -112,91 +112,83 @@ class HourController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
-    public function listDate()
-        // 当月
-    {
-        $thisYear = Carbon::now()->year;
-        $thisMonth = Carbon::now()->month;
-
-        $thisMonthCategoryHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
-        $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->sum('hour');
-        $thisMonthHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
-
-        return view('hours.list_date', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
-     */
-    public function listMonth()
+    public function listMonths()
     {
         $hours = DB::table('hours')->select(DB::raw('SUM(hour) as sum_hour'), DB::raw('DATE_FORMAT(date, "%Y/%m") as everyMonth'))->groupby(DB::raw('DATE_FORMAT(date, "%Y/%m")'))->get();
 
-        return view('hours.list_month', compact('hours'));
+        return view('hours.list_months', compact('hours'));
     }
 
     /**
      * Display a listing of the specified resource.
-     * @param  String $year
      * @param  String $month
      * @return \Illuminate\Http\Response
      */
-    public function listSelectMonth(String $year, String $month)
-        // アクセスされた月
+    public function listDates(String $yearMonth)
+        // 選択した月の日付一覧
     {
-        $thisMonthCategoryHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
-        $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->sum('hour');
-        $thisMonthHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
+        $year =  explode("-", $yearMonth)[0];
+        $month = explode("-", $yearMonth)[1];
 
-        return view('hours.list_date', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'));
-            // 当月一覧で使用しているbladeに飛ぶ。
+        list($thisMonthHours, $thisMonthCategoryHours, $thisMonthCategoryHourSum) = $this->listProcess($year, $month);
+
+        return view('hours.list_dates', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum', 'year', 'month'));
     }
 
-    // wip
-    public function listProcess($thisYear, $thisMonth)
+    /**
+     * Display a listing of the specified resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function listThisMonth()
+        // 当月の日付一覧
     {
-        $thisMonthCategoryHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
-        $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->sum('hour');
-        $thisMonthHours = Hour::whereYear('date', '=', $thisYear)->whereMonth('date', '=', $thisMonth)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
+        $thisYear = Carbon::now()->year;
+        $thisMonth = Carbon::now()->month;
+
+        list($thisMonthHours, $thisMonthCategoryHours, $thisMonthCategoryHourSum) = $this->listProcess($thisYear, $thisMonth);
+
+        return view('hours.list_dates', compact('thisMonthHours', 'thisMonthCategoryHours', 'thisMonthCategoryHourSum'))->with([
+            'year' => $thisYear,
+            'month' => $thisMonth
+        ]);
+    }
+
+    /**
+     * [listProcess description]
+     * @param  String $year
+     * @param  String $month
+     * @return array
+     */
+    public function listProcess(String $year, String $month)
+    {
+        $thisMonthHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->orderBy('date', 'ASC')->get();
+        $thisMonthCategoryHours = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->select('category_id', DB::raw('SUM(hour) as sum_hour'))->groupby('category_id')->get();
+        $thisMonthCategoryHourSum = Hour::whereYear('date', '=', $year)->whereMonth('date', '=', $month)->sum('hour');
+
+        return [$thisMonthHours, $thisMonthCategoryHours, $thisMonthCategoryHourSum];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  String  $$date
+     * @param  String $month
+     * @param  String $date
      * @return \Illuminate\Http\Response
      */
-    public function showDate(String $date)
+    public function showDate(String $month, String $date)
         // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
-        $targetHours = Hour::where('date', $date)->get();
-        // $test = Hour::select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->havingRaw('date = '.$date);
+        $joinDate = $month .'-' . $date;
+        $targetHours = Hour::where('date', $joinDate)->get();
         $sum_hour = DB::table('hours')
-                ->select('date', DB::raw('SUM(hour) as sum_hour'))
-                ->groupBy('date')
-                ->havingRaw('date = ?', [$date])
-                ->get()[0]->sum_hour;
+            ->select('date', DB::raw('SUM(hour) as sum_hour'))
+            ->groupBy('date')
+            ->havingRaw('date = ?', [$joinDate])
+            ->get()[0]->sum_hour;
 
-        return view('hours.show_date', compact('date', 'targetHours', 'sum_hour'));
-    }
-
-    // wip：不要？
-    public function showMonth($date)
-        // 引数にはURLの文字列が該当し、その変数名で取得可能。
-    {
-        // $targetHours = Hour::where('date', $date)->get();
-        // // $test = Hour::select('date', DB::raw('SUM(hour) as sum_hour'))->groupby('date')->havingRaw('date = '.$date);
-        // $sum_hour = DB::table('hours')
-        //         ->select('date', DB::raw('SUM(hour) as sum_hour'))
-        //         ->groupBy('date')
-        //         ->havingRaw('date = ?', [$date])
-        //         ->get()[0]->sum_hour;
-
-        return view('hours.show_month', compact('date', 'targetHours', 'sum_hour'));
+        return view('hours.show_date', compact('month', 'date', 'targetHours', 'sum_hour'));
     }
 
     /**
