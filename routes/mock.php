@@ -80,6 +80,8 @@ Route::get('mock/{page?}', function ($page = null) {
 // ————————————————————
 
 // テストメール用の参考ビュー表示用
-Route::get('/hours/test_mail', function() {
+Route::get('/tests/test_mail', function() {
     return new App\Mail\TestSendMail();
-});
+})->name('tests.test_mail');
+
+Route::resource('tests', 'TestController');
