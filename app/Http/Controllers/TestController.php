@@ -14,8 +14,26 @@ use DB;
 use Mail;
 use App\Mail\TestSendMail;
 
+use App\Jobs\StoreText;  // ジョブクラスをuseする
+
 class TestController extends Controller
 {
+
+    /**
+     * ジョブクラスを動かす
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function queues()
+    {
+        $text = str_random(1000);
+
+        // ジョブをディスパッチする
+        $this->dispatch(new StoreText($text));
+
+        return view('tests.queues');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -84,4 +84,7 @@ Route::get('/tests/test_mail', function() {
     return new App\Mail\TestSendMail();
 })->name('tests.test_mail');
 
+// ジョブクラスを動かす為のルーティング
+Route::get('tests/queues', 'TestController@queues');
+
 Route::resource('tests', 'TestController');
