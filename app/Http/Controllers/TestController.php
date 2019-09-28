@@ -14,10 +14,21 @@ use DB;
 use Mail;
 use App\Mail\TestSendMail;
 
-use App\Jobs\StoreText;  // ジョブクラスをuseする
+// ジョブクラス関連
+use App\Jobs\StoreText;
+use App\Jobs\GenerateTextFile;
+use App\Http\Components\FileOperation;
 
 class TestController extends Controller
 {
+    const MAX = 30000; // ループ回数
+
+    private $fp;
+
+    public function __construct()
+    {
+        $this->fp = new FileOperation();
+    }
 
     /**
      * ジョブクラスを動かす
@@ -32,6 +43,38 @@ class TestController extends Controller
         $this->dispatch(new StoreText($text));
 
         return view('tests.queues');
+    }
+
+    /**
+     * 通常
+     *
+     * @return [type] [description]
+     */
+    public function queuesNone()
+    {
+        $start = time();
+
+        $file = $this->fp->makeTextFile();
+
+        $this->fp->write($file, self::MAX);
+
+        return view('tests.queues', ['start' => $start]);
+    }
+
+    /**
+     * 非同期用
+     *
+     * @return [type] [description]
+     */
+    public function queuesDatabase()
+    {
+        $start = time();
+
+        $file = $this->fp->makeTextFile();
+
+        GenerateTextFile::dispatch($file, self::MAX);
+
+        return view('tests.queues', ['start' => $start]);
     }
 
     /**

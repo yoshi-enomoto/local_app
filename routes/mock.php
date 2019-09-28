@@ -86,5 +86,8 @@ Route::get('/tests/test_mail', function() {
 
 // ジョブクラスを動かす為のルーティング
 Route::get('tests/queues', 'TestController@queues');
+//
+Route::get('tests/queues/none', 'TestController@queuesNone');
+Route::get('tests/queues/database', 'TestController@queuesDatabase');
 
 Route::resource('tests', 'TestController');

@@ -8,5 +8,9 @@
 <p>
   Queues test!!
 </p>
+@if(!empty($start))
+  {{ time() - $start }}
+@endempty
+{{-- {{ dd($start, time()) }} --}}
 </body>
 </html>

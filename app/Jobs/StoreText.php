@@ -35,7 +35,9 @@ class StoreText implements ShouldQueue
     {
         // テキストファイル作成
         $file = sprintf('%s/%s.txt', storage_path('texts'), date('Q-Ymd-His'));
+            // ストレージパス/日付.txtという名前を作成
         touch($file);
+            // ファイル作成
         // 書き込み
         $current = file_get_contents($file);
         $current .= $this->param;
