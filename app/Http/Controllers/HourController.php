@@ -94,7 +94,7 @@ class HourController extends Controller
             $hour->update(array_merge($hoursInput, ['date' => $dateInput]));
         }
 
-        return redirect()->route('hours.show_date', $hour->date->format('Y-m-d'))->with('success', '時間を更新しました。');
+        return redirect()->route('hours.show_date', [$hour->date->format('Y-m'), $hour->date->format('d')])->with('success', '時間を更新しました。');
     }
 
     /**
@@ -160,22 +160,23 @@ class HourController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  String $month
+     * @param  String $year_and_month
      * @param  String $date
      * @return \Illuminate\Http\Response
      */
-    public function showDate(String $month, String $date)
+    public function showDate(String $year_and_month, String $date)
         // 引数にはURLの文字列が該当し、その変数名で取得可能。
     {
-        $joinDate = $month .'-' . $date;
+        $joinDate = $year_and_month .'-' . $date;
         $targetHours = Hour::where('date', $joinDate)->get();
         $sum_hour = DB::table('hours')
             ->select('date', DB::raw('SUM(hour) as sum_hour'))
             ->groupBy('date')
             ->havingRaw('date = ?', [$joinDate])
-            ->get()[0]->sum_hour;
+            // ->get()[0]->sum_hour;
+            ->first()->sum_hour;
 
-        return view('hours.show_date', compact('month', 'date', 'targetHours', 'sum_hour'));
+        return view('hours.show_date', compact('year_and_month', 'date', 'targetHours', 'sum_hour'));
     }
 
     /**

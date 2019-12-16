@@ -3,7 +3,7 @@
 @section('title_prefix')
     詳細：
 @endsection
-@section('title', $month .'-' .$date)
+@section('title', $year_and_month .'-' .$date)
 
 <!-- コンテンツヘッダ -->
 @section('content-header')
