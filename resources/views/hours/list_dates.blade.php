@@ -11,6 +11,7 @@
     <!-- パンくずリスト -->
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
+        <li><a href="{{ route('hours.list_months') }}">月一覧（未）</a></li>
         <li>@yield('title_prefix')</li>
     </ol>
 @endsection
@@ -100,21 +101,24 @@
                             <th style="width: 60%;">総時間数</th>
                             <th style="width: 30%;"></th>
                         </tr>
-                            @foreach($thisMonthHours as $key => $hour)
-                                <tr>
-                                    <td style="vertical-align: middle;">{{ $hour->date->format('m/d') }}（{{ config('const.week')[$hour->date->format('w')] }}）</td>
-                                    <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
-                                    {{-- <td style="vertical-align: middle;">{{ number_format($hour->hour, 2) }}h</td> --}}
-                                    <td>
-                                        {{-- <a href="{{ route('hours.show_date', $hour->date->format('Y-m-d')) }}" class="btn btn-sm btn-success">詳細</a> --}}
-                                        <a href="{{ route('hours.show_date', [$hour->date->format('Y-m'),  $hour->date->format('d')]) }}" class="btn btn-sm btn-success">詳細</a>
-                                        {{-- <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a> --}}
-                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $key }}">削除</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach($thisMonthHours as $key => $hour)
+                            <tr>
+                                <td style="vertical-align: middle;">{{ $hour->date->format('m/d') }}（{{ config('const.week')[$hour->date->format('w')] }}）</td>
+                                <td style="vertical-align: middle;">{{ $hour->sum_hour }}h</td>
+                                {{-- <td style="vertical-align: middle;">{{ number_format($hour->hour, 2) }}h</td> --}}
+                                <td>
+                                    {{-- <a href="{{ route('hours.show_date', $hour->date->format('Y-m-d')) }}" class="btn btn-sm btn-success">詳細</a> --}}
+                                    <a href="{{ route('hours.show_date', [$hour->date->format('Y-m'),  $hour->date->format('d')]) }}" class="btn btn-sm btn-success">詳細</a>
+                                    {{-- <a href="{{ route('hours.edit', $hour) }}" class="btn btn-sm btn-primary">編集</a> --}}
+                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal_{{ $key }}">削除</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="box-footer">
+                <a href="{{ route('hours.list_months') }}" class="btn btn-sm btn-default">月一覧へ戻る</a>
             </div>
         </div>
     </form>

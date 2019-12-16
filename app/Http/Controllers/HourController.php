@@ -34,14 +34,16 @@ class HourController extends Controller
      */
     public function store(StoreHourRequest $request)
     {
+        $date = explode('-', $request->input('date'));
+
         if($request->input('register') == '連続登録する') {
             $this->storeProcess($request);
 
             return redirect()->route('hours.create')->with('success', '時間を登録しました。');
         } else {
-            $this->storeProcess($request);
+            $hour = $this->storeProcess($request);
 
-            return redirect()->route('hours.list_date')->with('success', '時間を登録しました。');
+            return redirect()->route('hours.show_date', [$date[0].'-'.$date[1], $date[2]])->with('success', '時間を登録しました。');
         }
     }
 
@@ -60,8 +62,10 @@ class HourController extends Controller
             // 更に階層を深くすることができる
 
         foreach ($hoursInputs as $hoursInput ) {
-            Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
+            $hour = Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
         }
+
+        return $hour;
     }
 
     /**

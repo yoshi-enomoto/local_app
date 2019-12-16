@@ -93,6 +93,7 @@
             </div>
             <div class="box-footer">
                 {{-- <a href="javascript:history.back()" class="btn btn-sm btn-default">前に戻る</a> --}}
+                {{-- <a href="{{ route('hours.list_months') }}" class="btn btn-sm btn-default">月一覧へ戻る</a> --}}
                 <a href="{{ route('hours.list_this_month') }}" class="btn btn-sm btn-default">当月一覧へ戻る</a>
             </div>
         </form>

@@ -1,17 +1,18 @@
 @extends('_layouts.default')
 
 @section('title_prefix')
-    詳細：
+    日付詳細：
 @endsection
 @section('title', $year_and_month .'-' .$date)
 
 <!-- コンテンツヘッダ -->
 @section('content-header')
-    <h1>@yield('title_prefix')</h1>
+    <h1>@yield('title_prefix')@yield('title')</h1>
     <!-- パンくずリスト -->
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
-        <li><a href="{{ route('hours.list_this_month') }}">当月一覧</a></li>
+        <li><a href="{{ route('hours.list_months') }}">月一覧（未）</a></li>
+        <li><a href="{{ route('hours.list_dates', $year_and_month) }}">月詳細：{{ $year_and_month }}</a></li>
         <li class="active">@yield('title_prefix')@yield('title')</li>
     </ol>
 @endsection
@@ -22,7 +23,10 @@
     <div class="box box-success">
         <form class="form-horizontal">
             <div class="box-header with-border">
-                <h3 class="box-title">@yield('title')</h3>
+                <h3 class="box-title"></h3>
+                <div class="box-tools">
+                    <a href="{{ route('hours.create') }}" class="btn btn-sm btn-primary">時間入力</a>
+                </div>
 {{--                 <div class="box-tools">
                     <a href="{{ route('mock_hours', ['edit']) }}" class="btn btn-sm btn-primary">編集</a>
                 </div> --}}
@@ -53,8 +57,7 @@
                         <p class="form-control-static">{{ $sum_hour }}h</p>
                     </div>
                 </div>
-                {{-- <a href="{{ route('hours.list_this_month') }}" class="btn btn-sm btn-default">当月一覧へ戻る</a> --}}
-                <a href="javascript:history.back()" class="btn btn-sm btn-default">月詳細へ戻る</a>
+                <a href="{{ route('hours.list_dates', $year_and_month) }}" class="btn btn-sm btn-default">月詳細へ戻る</a>
             </div>
         </form>
     </div>
