@@ -63,6 +63,14 @@ class HourController extends Controller
 
         foreach ($hoursInputs as $hoursInput ) {
             $hour = Hour::create(array_merge($hoursInput, ['date' => $dateInput]));
+                // メールコントローラーに渡す為に、変数に格納。
+
+            // 通知クラスに$hour、を渡す。
+
+            // $to = 'example@example.com';
+            // $subject = '時間登録内容';
+            // $body = $hour;
+            // Mail::to($to)->send(new TestSendMail($subject, $body));
         }
 
         return $hour;
